@@ -1,5 +1,5 @@
 language: node_js
-node_js: stable
+node_js: 13
 branches:
   only:
   - source
@@ -16,9 +16,5 @@ script:
 after_success:
 - git config --global user.name "yanandcoffee"
 - git config --global user.email "mangakjd@gmail.com"
-- sed -i'' - sed -i'' "s~git@github.com:yanandcoffee/yanandcoffee.github.io.git~https://${REPO_TOKEN}@github.com/yanandcoffee/yanandcoffee.github.io.git~"
-  _config.yml
+- sed -i'' - sed -i'' "s~git@github.com:yanandcoffee/yanandcoffee.github.io.git~https://${REPO_TOKEN}@github.com/yanandcoffee/yanandcoffee.github.io.git~" _config.yml
 - hexo d
-env:
-  global:
-    secure: eSMToywDDwwlBuKZqMxI1xhkDpt4TPOmx+0ZnhEyRo22dfXs1U8XrtdWE9E+IBf2y53KpcPfKEEZOU4Y7Vl1C+Ellvd2fE9qborT3hyjjZhV6aRD7nhhl+oCAaOfYFJvCJMAFHGh86BFovf4aXfLBW+B3XnqvyTQdZvOTz6vfcNh9QzfYuDEphsqx/6JHOmVzFGaWv7y521EL/KFjPJDI6Uh6MfVi87nVmpUVBlAkz0JEUcMEsXY1YWJea1vJiwgaE6iexyTQJMjn1t1tUD+z3Wq9XV1i7sSvsYJebFPETnM4J9zILSwUSNKfV58qy88BmdIjZ8n2rcGA3ZBpnLVXRtWRFKJPbsJ2w2w80VDMXaabyv18YaFQYRLVn/mZi3exZMCnBg+5xoCwi1/BKdPghAVl8L7wr83kWtopj5ju42mXV5BYT9DEOdQ6aTQN6JB1WkXaXGDeVpEINqUReNC4mi9fvsUzKexzVZ8y0mfnUM2hOcqH0St14dRZ8KhZ4/ZR0hqCQSuzZ35BDo3AkQ6lb2v0SU+AQshQooWcvY8J8dR0BoyWTxXLE46yV/xNQdSRPd0NVlCRq4TsJ9W1u5wzc2RoTZfX1ZGP2wmKzpBeE2jmK1H4VTwBF1J55npc68BNn3Ke+dv1rddqzIDYiC6oaLx84pncyFf+6ytaK8b6+I=
