@@ -4,7 +4,7 @@
 
 # Site
 title: Yan and Coffee's Blog
-subtitle: 'a frontend engineer's blog on all things that make a better user experience'
+subtitle: a frontend engineer's blog on all things that make a better user experience
 description: ''
 keywords:
 author: Yan Li
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

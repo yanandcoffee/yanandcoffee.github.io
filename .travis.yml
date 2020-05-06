@@ -8,6 +8,7 @@ cache:
   - node_modules
 before_install:
 - npm install -g hexo-cli
+- git clone -b master https://github.com/yanandcoffee/hexo-theme-cactus.git themes/cactus
 install:
 - npm install
 script:
