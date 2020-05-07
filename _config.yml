@@ -4,8 +4,8 @@
 
 # Site
 title: Yan and Coffee's Blog
-subtitle: a frontend engineer's blog on all things that make a better user experience
-description: ''
+subtitle: on all things frontend related that make a better user experience
+description: My name is Yan Li. I'm a Senior Software Engineer at Adobe and I like to create user experiences that matter. I will share my code and experience in JS, React, and CSS here.
 keywords:
 author: Yan Li
 language: en
@@ -74,7 +74,7 @@ meta_generator: true
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
-date_format: MM-DD-YYYY
+date_format: MMM DD, YYYY
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
 use_date_for_updated: false
