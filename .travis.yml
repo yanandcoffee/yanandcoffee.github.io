@@ -8,8 +8,7 @@ cache:
   - node_modules
 before_install:
 - npm install -g hexo-cli
-- git submodule init
-- git submodule update
+- git submodule update --recursive --init --remote
 install:
 - npm install
 script:
