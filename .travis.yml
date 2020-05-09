@@ -6,22 +6,19 @@ branches:
 cache:
   directories:
   - node_modules
-before_install:
-- npm install -g hexo-cli
-- git submodule update --recursive --init --remote
+before_install: 
 - cd themes/cactus
 - git checkout master
+- cd ../../
 install:
+- npm install -g hexo-cli
 - npm install
-script:
-- hexo clean
-- hexo generate
 before_script:
 - git config --global user.name "yanandcoffee"
 - git config --global user.email "mangakjd@gmail.com"
 - sed -i'' "s~git@github.com:yanandcoffee/yanandcoffee.github.io.git~https://${GH_TOKEN}:x-oauth-basic@github.com/yanandcoffee/yanandcoffee.github.io.git~" _config.yml
 script:
-- hexo d
+- hexo g -d
 env:
   global:
     secure: Wo4O+/VNIY3xKe2v6+LnQmhMvQKwKqsuDBLdOrnbFDfUZ51b7o60XUqAbLgT7VqEbsDdIqEzyk3UiFu7pMnN6M+EBxmBqvJi9JaUts3Ek2wKhjc8iptlIJcPFZtBhQNKXiY6N0I+uTyoWSCqKzbDenzvx4hRNh4QiWtUpqFJRi0HwCZGm76m8VPniuNU7rP8YG7wuQm4YiOelQEoyCQWcE+v2ojQ/ZUAnVK4uH/JTgvzc/nwpT97OfJG5Kse0iHsRCzFLivWIp9MiIX8GpHlm7xv8cnmVukCdsV0k9hKqPZo5ts8eJMxkdrEGemYIKXgqe1ZcZpZNQ7ABmf27dMJWZ9CPnZyfKbnh01zaWt1HFuvs4NfVQpG+u6g/r5RYUEQBi+ATsNUR6i+Ew+iSTT0xg8AyZcfrpAc57N0lfDZNWLHBHiclx6oht4QBw8FsO2lJkhnyKWKH/WGt+zC2rfP1qgJ55Tp7lma0f27p/BAdFmynGONBXS+f//n5BGMeamqeV1Eh0LE7svXb0rVGuOHPiSlBze4G7JuIe4p9YcyO9lT8CXztbrwHzMM6+6q5Cf0FESi9i3/KeA57sCwvJ2CeB2w3UCjbxmzTL0liXkNJfGRbR++P7LtnMgPG1cf3OUdBKgS+/ix46NwxWft4NhmXdp5j2J3UbAJmzpm3umpXy8=
