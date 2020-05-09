@@ -9,6 +9,8 @@ cache:
 before_install:
 - npm install -g hexo-cli
 - git submodule update --recursive --init --remote
+- cd themes/cactus
+- git checkout master
 install:
 - npm install
 script:

@@ -14,7 +14,7 @@ tags:
 This is a pretty simple and relatively common use scenario in accessibility. I am a keyboard user. I land on a website and I want to skip to the section that I'm interested in given a list of navigation links. Like this:
 
 <figure>
-  <video controls="controls" width="960" height="500" name="Video Name" src="./demo.mov"></video>
+  <video controls="controls" width="100%" height="100%" maxWidth="960" maxHeight="500" name="Video Name" src="./demo.mov"></video>
 </figure>
 
 [Skip links](https://webaim.org/techniques/skipnav/) are a similar concept so the same solutions may apply. There are a few ways to implement this.
