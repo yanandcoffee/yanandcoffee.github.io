@@ -1,5 +1,5 @@
 ---
-title: Hi, my name is Yan!
+title: Hi, My Name Is Yan!
 date: 2020-05-06 22:17:40
 tags:
 category:
