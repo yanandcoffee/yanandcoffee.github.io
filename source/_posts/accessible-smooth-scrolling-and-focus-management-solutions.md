@@ -29,6 +29,36 @@ I mocked up these examples to demonstrate the possible solutions in pure JS, pur
   (<a href='https://codepen.io/yanandcoffee'>@yanandcoffee</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
+It only requires one line of CSS:
+```css
+html {
+  scroll-behavior: smooth;
+}
+```
+and your navigational anchor tags will need to have the `href` pointing to a hash + target element id like so:
+```html
+   <ul class="nav">
+      <li class="navItem">
+         <a href="#section-1-heading" class="navButton">Section 1</a>
+      </li>
+      <li class="navItem">
+         <a href="#section-2-heading" class="navButton">Section 2</a>
+      </li>
+      <li class="navItem">
+         <a href="#section-3-heading" class="navButton">Section 3</a>
+      </li>
+      <li class="navItem">
+         <a href="#section-4-heading" class="navButton">Section 4</a>
+      </li>
+      <li class="navItem">
+         <a href="#section-5-heading" class="navButton">Section 5</a>
+      </li>
+      <li class="navItem">
+         <a href="#section-6-heading" class="navButton">Section 6</a>
+      </li>
+   </ul>
+```
+
 If you are using React and React Router, you can try [React Router Hash Link](https://github.com/rafrex/react-router-hash-link) to achieve the same experience. If you are developing for a SPA, it may conflict with your router and you may/may not be able to use this solution.
 
 ## The alternative solution
@@ -43,6 +73,8 @@ There is a [`preventScroll`](https://developer.mozilla.org/en-US/docs/Web/API/HT
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
+
+The key is to trigger a `element.focus()` and a `window.scrollTo()` on the click of each navigational element.
 
 The React version would require using refs: https://codesandbox.io/s/focus-preventscroll-solution-n3sie?from-embed
 
