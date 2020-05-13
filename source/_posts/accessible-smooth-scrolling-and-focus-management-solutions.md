@@ -24,10 +24,12 @@ I mocked up these examples to demonstrate the possible solutions in pure JS, pur
 ## The Best Solution
 [scroll-behavior: smooth](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior), which this blog uses, is the best solution, hands-down. It uses the native `href` on the anchor tag, which is native HTML that will bring you to the element that has the same matching `id`. However, it will not work with a sticky top nav because it cannot calculate the height of the sticky top nav. My example here will use a sticky side nav instead to demostrate its natural awesomeness:
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="scroll-behavior: smooth, a pure CSS solution" src="https://codepen.io/yanandcoffee/embed/zYvPMyW?height=500&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/yanandcoffee/pen/zYvPMyW'>scroll-behavior: smooth, a pure CSS solution</a> by Yan Li
-  (<a href='https://codepen.io/yanandcoffee'>@yanandcoffee</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<p class="codepen" data-height="500" data-theme-id="dark" data-default-tab="result" data-user="yanandcoffee" data-slug-hash="zYvPMyW" style="height: 500px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="scroll-behavior: smooth, a pure CSS solution">
+  <span>See the Pen <a href="https://codepen.io/yanandcoffee/pen/zYvPMyW">
+  scroll-behavior: smooth, a pure CSS solution</a> by Yan Li (<a href="https://codepen.io/yanandcoffee">@yanandcoffee</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 It only requires one line of CSS:
 ```css
