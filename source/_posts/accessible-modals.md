@@ -5,7 +5,6 @@ tags:
 - a11y
 - accessibility
 - modals
-- pseudocode
 - focus management
 - javascript
 - React
@@ -83,7 +82,7 @@ Solution:
 When the user invokes the dialog, the buttons on the page need to be removed from the tab order of the page so that we can rely on the native sequential tab order to guide the user to the interactable elements available inside the modal. To remove an element from the sequential keyboard navigation order, we need to give the button elements a `tabIndex` of -1. Since we still want these buttons to be interactable after we close the modal, we will want to conditionally set this tabIndex value so that they aren't focusable when the modal is open, but when the modal is closed, they should be.
 
 In JSX:
-```jsx
+```jsx 
 <button
     onClick={onButtonClick}
     className="spectrum-Button spectrum-Button--primary"
@@ -124,7 +123,7 @@ const [selectedButtonId, setSelectedButtonId] = useState();
 ```
 
 We modify the onButtonClick handler that was on our buttons to set the selectedButtonId:
-```javascript
+```jsx
 const onButtonClick = event => {
     setIsOpen(true);
     setSelectedButton(event.target.id);
@@ -132,7 +131,7 @@ const onButtonClick = event => {
 ```
 
 Then, we need to keep an array of button refs by using `useRef` hook and setting the button refs to be set via a callback ref function:
-```javascript
+```jsx
 const buttonRefs = useRef([]);
 const setSelectedRef = (element, id) => {
     if (!element) return;
@@ -172,7 +171,7 @@ const setSelectedRef = (element, id) => {
 ```
 
 Next, we need to trigger the focus on the previously selected button by adding a `focusSelectedButton` function:
-```javascript
+```jsx
 const closeDialog = () => {
     setIsOpen(false);
     focusSelectedButton();
