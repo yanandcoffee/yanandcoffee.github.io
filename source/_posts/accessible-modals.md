@@ -1,7 +1,7 @@
 ---
 title: Accessible Modals, Its Issues And The Solutions - Part 1
 date: 2020-05-25 23:25:00
-tags: 
+tags:
 - a11y
 - accessibility
 - modals
@@ -12,7 +12,7 @@ tags:
 - refs
 ---
 
-This post will be about how to create an accessibility compliant dialog modal in React. Modals are a pretty common pattern within UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also have a lot of accessibility concerns if they are done incorrectly. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, `tabIndex` is camelcased, but in HTML, `tabindex` should be all lowercase. 
+This post will be about how to create an accessibility compliant dialog modal in React. Modals are a pretty common pattern within UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also have a lot of accessibility concerns if they are done incorrectly. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, `tabIndex` is camelcased, but in HTML, `tabindex` should be all lowercase.
 
 I will be following the dialog modal guidelines from the [W3 Docs](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal).
 
@@ -36,32 +36,34 @@ If you understand what a dialog modal is and how it "works," you understand how 
 
 ![Simplfied drawing of the modal UI](./modal-concept.png)
 
-Initially, the modal is not on the page, so what does it mean for the logic? We hide the modal when the page loads. 
+Initially, the modal is not on the page, so what does it mean for the logic? We hide the modal when the page loads.
 
 ![Simplified drawing of the page with a button](./page-by-itself.png)
 
-We only show the button for triggering the modal. When the user clicks the button, or triggers the button via the keyboard, the modal shows up. There may be some CSS that needs to be added to make this UI experience look and feel better, but the concept of a modal is simply 1) the HTML for the modal and 2) the logic to show and hide it. We have our modal pattern.
+We only show the button for triggering the modal. When the user clicks the button, or triggers the button via the keyboard, the modal shows up. There may be an underlay element and some CSS that needs to be added to make this UI experience look and feel better, but the concept of a modal is simply 1) the HTML for the modal and 2) the logic to show and hide it. This is our modal pattern.
 
 ## Making The Modal Accessible Via Keyboard
-In order to understand how to make an accessible modal, try tabbing through your UI. Start from the URL bar of your browser and do not use your mouse at all. Use `Tab` and `Shift + Tab` to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal and the UI looks like this:
+In order to understand how to make an accessible modal, you have to test your UI. Start from the URL bar of your browser and do not use your mouse at all. Use only `Tab` and `Shift + Tab` keys to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal. The testing experience looks like this:
 
 <figure>
   <video controls="controls" width="100%" height="100%" maxWidth="960" maxHeight="500" name="Video Name" src="./demo.mov"></video>
 </figure>
 
-[This](https://codesandbox.io/s/accessible-modals-before-nczzo?file=/src/components/ButtonsWithModal.js) _looks_ like we would be done if all we cared about were people with mouses. But once the modal is open, we can see there are a few accessibility issues.
+I tabbed forward and backward, interacted with the button trigger and tested the modal tab flow as well.
+
+[This](https://codesandbox.io/s/accessible-modals-before-nczzo?file=/src/components/ButtonsWithModal.js) _looks_ like we would be done if all we cared about was how a user interface looks. But once the modal is open, we can see there are a few accessibility issues.
 
 ### Accessibility Problem #1: Auto Focus Element Inside Modal
 As a user, once the modal is open, my focus appears to still be on the button that I invoked the dialog with and not on the first available element or the most frequently used element.
 
 ![Image of focus issue with active modal](./modal_with_focus_bug.png)
 
-Solution: 
-When the user invokes the dialog, the first element, the "Also Agreed" button, should be auto focused since we don't want the user to accidentally trigger the call-to-action without realizing it. This is as easy as adding `autoFocus` attribute on the button inside of the Dialog. The only gotcha is that `autoFocus` would only work if you are mounting the `<Dialog />` component at the time of the click since `autoFocus` attribute is [polyfilled in React](https://github.com/facebook/react/issues/11851#issuecomment-351672131) to call `.focus()` on the element that has this attribute due to browser inconsistencies with the html attribute `autofocus`. 
+Solution:
+When the user invokes the dialog, the first element, the "Also Agreed" button, should be auto focused since we don't want the user to accidentally trigger the call-to-action without realizing it. This is as easy as adding `autoFocus` attribute on the button inside of the Dialog. The only gotcha is that `autoFocus` would only work if you are mounting the `<Dialog />` component at the time of the click since `autoFocus` attribute is [polyfilled in React](https://github.com/facebook/react/issues/11851#issuecomment-351672131) to call `.focus()` on the element that has this attribute due to browser inconsistencies with the html attribute `autofocus`.
 
 In my demo, within my Dialog component, I would put the `autoFocus` attribute on the button:
 
-```jsx 
+```jsx
 <button
     className="spectrum-Button spectrum-Button--secondary"
     onClick={closeDialog}
@@ -82,7 +84,7 @@ Solution:
 When the user invokes the dialog, the buttons on the page need to be removed from the tab order of the page so that we can rely on the native sequential tab order to guide the user to the interactable elements available inside the modal. To remove an element from the sequential keyboard navigation order, we need to give the button elements a `tabIndex` of -1. Since we still want these buttons to be interactable after we close the modal, we will want to conditionally set this tabIndex value so that they aren't focusable when the modal is open, but when the modal is closed, they should be.
 
 In JSX:
-```jsx 
+```jsx
 <button
     onClick={onButtonClick}
     className="spectrum-Button spectrum-Button--primary"
@@ -176,7 +178,7 @@ const closeDialog = () => {
     setIsOpen(false);
     focusSelectedButton();
 };
-const focusSelectedButton = () => 
+const focusSelectedButton = () =>
     buttonRefs.current
         .find(ref => ref.id === selectedButtonId)
         ?.element?.focus();
@@ -186,7 +188,7 @@ const focusSelectedButton = () =>
 This should focus on the previously selected button when the dialog closes.
 
 ## Conclusion
-I walked through the most common accessibility issues that one would face when creating their own modal and how to address these issues with techniques such as controlling the sequential tab order with `tabIndex` ([tabindex](https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex)) and [programmatically managing focus](https://reactjs.org/docs/accessibility.html#programmatically-managing-focus) with React refs. 
+I walked through the most common accessibility issues that one would face when creating their own modal and how to address these issues with techniques such as controlling the sequential tab order with `tabIndex` ([tabindex](https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex)) and [programmatically managing focus](https://reactjs.org/docs/accessibility.html#programmatically-managing-focus) with React refs.
 
 That's it for part 1! Part 2 will be focused on how we can enable `Tab`, `Shift + Tab` + `Escape` keys within an active modal to behave like the guidelines mentioned in the [SparkNotes section](#before-we-get-started). This is the working demo for the current state:
 <iframe
