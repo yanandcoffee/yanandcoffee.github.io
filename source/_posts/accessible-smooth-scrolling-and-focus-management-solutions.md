@@ -19,7 +19,7 @@ This is a pretty simple and relatively common use scenario in accessibility. I a
 
 [Skip links](https://webaim.org/techniques/skipnav/) are a similar concept so the same solutions may apply. There are a few ways to implement this.
 
-I mocked up these examples to demonstrate the possible solutions in pure JS, pure CSS/HTML, and React.
+I mocked up these examples to demonstrate the possible solutions in pure JS, pure CSS/HTML, and React. Please note that I added a `tabindex=0` to the headings so that they are focusable in all of the examples to see where the focus should be if you used one of the nav links, but this is just for the demo, not for accessibility compliance.
 
 ## The Best Solution
 [scroll-behavior: smooth](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior), which this blog uses, is the best solution, hands-down. It uses the native `href` on the anchor tag, which is native HTML that will bring you to the element that has the same matching `id`. However, it will not work with a sticky top nav because it cannot calculate the height of the sticky top nav. My example here will use a sticky side nav instead to demostrate its natural awesomeness:
@@ -82,7 +82,5 @@ The React version would require using refs: https://codesandbox.io/s/focus-preve
 
 ## Last Words
 All of the example solutions provided here are lightweight and provide a nice user experience while keeping accessibility in mind. It doesn't require a whole library, or a ton of code!
-
-Please note that I added a `tabindex=0` to the headings so that they are focusable in all of the examples, but this is just for emphasis, and you don't need this at all.
 
 I'm still learning about accessibility, but I now have the habit of checking and building it into all of my work and you should too. The world deserves to be able to access the web and the internet pages that we build, and it relies on us, the engineers, to achieve that.
