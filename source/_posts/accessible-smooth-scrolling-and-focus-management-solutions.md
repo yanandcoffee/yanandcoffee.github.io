@@ -1,5 +1,5 @@
 ---
-title: Accessible Smooth Scrolling + Focus Management Solutions
+title: Accessible Navigation with Smooth Scrolling + Focus Management
 date: 2020-05-08 19:31:12
 tags:
 - a11y
