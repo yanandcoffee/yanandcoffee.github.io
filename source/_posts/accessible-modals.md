@@ -45,7 +45,7 @@ Initially, the modal is not on the page, so what does it mean for the logic? We 
 
 We only show the button for triggering the modal. When the user clicks the button, or triggers the button via the keyboard, the modal shows up. There may be an underlay element and some CSS that needs to be added to make this UI experience look and feel better, but the concept of a modal is simply 1) the HTML for the modal and 2) the logic to show and hide it. This is our modal pattern.
 
-## ARIA
+## ARIA Attributes
 For screen reader users, this is important. This is the dialog div wrapping the content:
 
 ![div receiving role=dialog](./role=dialog.png)
@@ -78,6 +78,11 @@ It should receive 1) `role="dialog"`, 2) `aria-modal="true"` if it is a focus tr
     </div>
 </div>
 ```
+
+If all of the above is done correctly, it should be organized correctly like this for the screen reader users:
+
+![accessibility tab on chrome](./aria.png)
+
 
 ## Keyboard Accessibility
 In order to understand how to make an accessible modal, you have to test your UI. Start from the URL bar of your browser and do not use your mouse at all. Use only `Tab` and `Shift + Tab` keys to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal. The testing experience looks like this:
