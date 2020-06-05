@@ -1,6 +1,7 @@
 ---
 title: Accessible Modals, Its Issues And The Solutions - Part 1
 date: 2020-05-25 23:25:00
+updated: 2020-06-05 4:12:00
 tags:
 - a11y
 - accessibility
@@ -12,7 +13,9 @@ tags:
 - refs
 ---
 
-This post will be about how to create an accessibility compliant dialog modal in React. Modals are a pretty common pattern within UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also have a lot of accessibility concerns if they are done incorrectly. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, `tabIndex` is camelcased, but in HTML, `tabindex` should be all lowercase.
+This post will be about how to create an accessibility compliant dialog modal in React. Modals are a pretty common pattern within UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also have a lot of accessibility concerns if they are done incorrectly. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues.
+
+The [full example](https://codesandbox.io/s/accessible-modals-after-part-1-bnvuu?from-embed) used for this post is written in React. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, `tabIndex` is camelcased, but in HTML, `tabindex` should be all lowercase. Some concepts may be explained in HTML for simplification/clarity purposes.
 
 I will be following the dialog modal guidelines from the [W3 Docs](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal).
 
@@ -42,7 +45,41 @@ Initially, the modal is not on the page, so what does it mean for the logic? We 
 
 We only show the button for triggering the modal. When the user clicks the button, or triggers the button via the keyboard, the modal shows up. There may be an underlay element and some CSS that needs to be added to make this UI experience look and feel better, but the concept of a modal is simply 1) the HTML for the modal and 2) the logic to show and hide it. This is our modal pattern.
 
-## Making The Modal Accessible Via Keyboard
+## ARIA
+For screen reader users, this is important. This is the dialog div wrapping the content:
+
+![div receiving role=dialog](./role=dialog.png)
+
+It should receive 1) `role="dialog"`, 2) `aria-modal="true"` if it is a focus trap and <strong>AND</strong> there is visual styling that obscures the content outside of it, 3) aria labeling for screen readers to announce the purpose of the dialog, e.g. the title with either an `aria-label` or a combination of `aria-labelledby` and an `id` on the (visible) dialog title.
+
+`aria-label`:
+```html
+<div role="dialog" aria-label="Coffee is Great">
+```
+
+`aria-labelledby` and matching `id` on the (visible) dialog title:
+```html
+<div role="dialog" aria-modal="true" aria-labelledby="dialog-label" aria-describedby="dialog-content">
+```
+
+[`aria-describedby`](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby) can also be used. It is similar to `aria-labelledby`, as they both should be on the element that wraps the main content they are describing. E.g. in the above example, `aria-labelledby` points to the heading title matching the `id`. `aria-describedby` should point to the text that describes the primary purpose of which it is on.
+
+```html
+<div role="dialog" aria-modal="true" aria-labelledby="dialog-label" aria-describedby="dialog-content" class="spectrum-Dialog spectrum-Dialog--medium">
+    <div class="spectrum-Dialog-header">
+        <h2 id="dialog-label" class="spectrum-Dialog-title">Coffee is Great</h2>
+    </div>
+    <div class="spectrum-Dialog-content">
+        <p id="dialog-content">Coffee is a Chihuahua mix and the best dog ever with a {stars div} rating.</p>
+    </div>
+    <div class="spectrum-Dialog-footer">
+        <button class="spectrum-Button spectrum-Button--secondary">Also Agreed</button>
+        <button class="spectrum-Button spectrum-Button--cta">Agreed</button>
+    </div>
+</div>
+```
+
+## Keyboard Accessibility
 In order to understand how to make an accessible modal, you have to test your UI. Start from the URL bar of your browser and do not use your mouse at all. Use only `Tab` and `Shift + Tab` keys to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal. The testing experience looks like this:
 
 <figure>
