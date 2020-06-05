@@ -29,7 +29,7 @@ Here's the SparkNotes* version of the W3 requirements:
   - If the dialog has limited interactions, focus should be on the most frequently used element such as the `OK` or `Continue` button
 - When a dialog closes, focus should return to the element that invoked the dialog unless the work flow design makes more logical sense to set the focus elsewhere*
 
-<small>* means it has been summarized and you should refer to the [docs]((https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal)) if you want more detailed guidelines.</small>
+<small>* means it has been summarized and you should refer to the [docs](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal) if you want more detailed guidelines.</small>
 
 ## What Is A Dialog Modal & How Does It Work
 If you understand what a dialog modal is and how it "works," you understand how to implement it and the accessibility problems that may come from it. In simple terms without thinking about any code, a dialog modal is simply a box on top of another box.
