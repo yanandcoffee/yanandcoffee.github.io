@@ -21,7 +21,7 @@ I will be following the dialog modal guidelines from the [W3 Docs](https://www.w
 
 ## Before We Get Started
 Here's the SparkNotes* version of the W3 requirements:
-- Users cannot interact with content outside an active dialog window meaning they contain their own tab sequence regardless of the other outside element (there are some cases where clicking outside of the dialog will close the dialog)
+- Users cannot interact with content outside an active dialog window, meaning they contain their own tab sequence regardless of the other outside element (there are some cases where clicking outside of the dialog will close the dialog)
 - Once the dialog is open, keyboard interactions should be as follows:
   - `Tab` moves forward to the next tabbable element
     - if you are at the end, it moves to the first
@@ -234,11 +234,11 @@ I walked through the most common accessibility issues that one would face when c
 
 That's it for part 1! Part 2 will be focused on how we can enable `Tab`, `Shift + Tab` + `Escape` keys within an active modal to behave like the guidelines mentioned in the [SparkNotes section](#before-we-get-started). This is the working demo for the current state:
 <iframe
-     src="https://codesandbox.io/embed/accessible-modals-after-part-1-bnvuu?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FButtonsWithModal.js&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="Accessible Modals: After, Part 1"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
-   ></iframe>
+    src="https://codesandbox.io/embed/accessible-modals-after-part-1-bnvuu?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FButtonsWithModal.js&theme=dark"
+    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+    title="Accessible Modals: After, Part 1"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
+></iframe>
 
 Stay tuned!
