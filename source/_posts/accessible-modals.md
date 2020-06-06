@@ -1,5 +1,5 @@
 ---
-title: Accessible Modals, Its Issues And The Solutions - Part 1
+title: Accessible Modals, Part 1 - Its Issues And The Solutions
 date: 2020-05-25 23:25:00
 updated: 2020-06-05 4:12:00
 tags:
@@ -21,7 +21,7 @@ I will be following the dialog modal guidelines from the [W3 Docs](https://www.w
 
 ## Before We Get Started
 Here's the SparkNotes* version of the W3 requirements:
-- Users cannot interact with content outside an active dialog window meaning they contain their own tab sequence regardless of the other outside element
+- Users cannot interact with content outside an active dialog window meaning they contain their own tab sequence regardless of the other outside element (there are some cases where clicking outside of the dialog will close the dialog)
 - Once the dialog is open, keyboard interactions should be as follows:
   - `Tab` moves forward to the next tabbable element
     - if you are at the end, it moves to the first
@@ -34,7 +34,7 @@ Here's the SparkNotes* version of the W3 requirements:
 
 <small>* means it has been summarized and you should refer to the [docs](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal) if you want more detailed guidelines.</small>
 
-## What Is A Dialog Modal & How Does It Work
+## What Is a Dialog Modal & How Does It Work
 If you understand what a dialog modal is and how it "works," you understand how to implement it and the accessibility problems that may come from it. In simple terms without thinking about any code, a dialog modal is simply a box on top of another box.
 
 ![Simplfied drawing of the modal UI](./modal-concept.png)
