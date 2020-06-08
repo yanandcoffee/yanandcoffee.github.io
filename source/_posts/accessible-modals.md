@@ -1,5 +1,6 @@
 ---
 title: Accessible Modals, Part 1 - Its Issues And The Solutions
+description: Modals are a pretty common pattern in UI/UX design, but they also come with a lot of accessibility concerns if done incorrectly. Here's how you can do it right.
 date: 2020-05-25 23:25:00
 updated: 2020-06-05 4:12:00
 tags:
@@ -13,7 +14,7 @@ tags:
 - refs
 ---
 
-This post will be about how to create an accessibility compliant dialog modal in React. Modals are a pretty common pattern within UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also have a lot of accessibility concerns if they are done incorrectly. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues.
+Modals are a pretty common pattern in UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also come with a lot of accessibility concerns if done incorrectly. This post will be about how to create an accessibility compliant dialog modal in React. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues.
 
 The [full example](https://codesandbox.io/s/accessible-modals-after-part-1-bnvuu?from-embed) used for this post is written in React. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, `tabIndex` is camelcased, but in HTML, `tabindex` should be all lowercase. Some concepts may be explained in HTML for simplification/clarity purposes.
 
@@ -82,7 +83,6 @@ It should receive 1) `role="dialog"`, 2) `aria-modal="true"` if it is a focus tr
 If all of the above is done correctly, it should be organized correctly like this for the screen reader users:
 
 ![accessibility tab on chrome](./aria.png)
-
 
 ## Keyboard Accessibility
 In order to understand how to make an accessible modal, you have to test your UI. Start from the URL bar of your browser and do not use your mouse at all. Use only `Tab` and `Shift + Tab` keys to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal. The testing experience looks like this:

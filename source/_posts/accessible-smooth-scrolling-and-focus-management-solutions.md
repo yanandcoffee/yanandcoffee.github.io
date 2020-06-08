@@ -1,5 +1,6 @@
 ---
 title: Accessible Navigation with Smooth Scrolling + Focus Management
+description: Ever wonder how your users can navigate to a section smoothly via keyboard and not lose their keyboard focus?
 date: 2020-05-08 19:31:12
 tags:
 - a11y

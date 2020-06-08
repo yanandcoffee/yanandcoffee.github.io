@@ -1,5 +1,6 @@
 ---
 title: Accessible Modals, Part 2 - Focus Trap! Key Events!
+description: In this continuation, you'll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal. 
 date: 2020-06-06 03:20:00
 tags:
 - a11y
