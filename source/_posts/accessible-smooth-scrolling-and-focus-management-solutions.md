@@ -20,7 +20,7 @@ This is a pretty simple and relatively common use scenario in accessibility. I a
 
 [Skip links](https://webaim.org/techniques/skipnav/) are a similar concept so the same solutions may apply.
 
-I mocked up these examples to demonstrate the possible solutions in pure JS, pure CSS/HTML, and React. Please note that I added a `tabindex=0` to the headings so that they are focusable in all of the examples to show where the focus should be after clicking on a nav link, but this is just for the demo, not for accessibility compliance.
+I mocked up these examples to demonstrate the possible solutions in pure JS, pure CSS/HTML, and React. Please note that I added a `tabindex=0` to the headings so that they are focusable in all of the examples to show where the focus would be after clicking on a nav link, but this is just for the demo and may/may not be necessary for your UI. In the scenario where you have more focsable content within each section, you may want to keep your user's focus there, but visibly not show the outline on the heading element. This can be done by adding `outline: 0` to the `<h2>` element.
 
 ## The Best Solution
 [scroll-behavior: smooth](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior), which this blog uses, is the best solution, hands-down. It uses the native `href` on the anchor tag, which is native HTML that will bring you to the element that has the same matching `id`. However, it will not work with a sticky top nav because it cannot calculate the height of the sticky top nav. My example here will use a sticky side nav instead to demostrate its natural awesomeness:
