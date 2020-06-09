@@ -60,7 +60,12 @@ It should receive 1) `role="dialog"`, 2) `aria-modal="true"` if it is a focus tr
 
 `aria-labelledby` and matching `id` on the (visible) dialog title:
 ```html
-<div role="dialog" aria-modal="true" aria-labelledby="dialog-label" aria-describedby="dialog-content">
+<div 
+    role="dialog" 
+    aria-modal="true" 
+    aria-labelledby="dialog-label" 
+    aria-describedby="dialog-content"
+>
 ```
 
 [`aria-describedby`](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby) can also be used. It is similar to `aria-labelledby`, as they both should be on the element that wraps the main content they are describing. E.g. in the above example, `aria-labelledby` points to the heading title matching the `id`. `aria-describedby` should point to the text that describes the primary purpose of which it is on.
