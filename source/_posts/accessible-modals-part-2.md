@@ -1,6 +1,6 @@
 ---
 title: Accessible Modals, Part 2 - Focus Trap! Key Events!
-description: In this continuation, you'll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal. 
+description: In this continuation, you'll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal.
 date: 2020-06-06 03:20:00
 tags:
 - a11y
@@ -39,15 +39,16 @@ First, let's talk about what we need in order for us to handle the interactions 
 ```
 
 ## Keeping the Focus Within the Dialog Modal
-If you noticed while tabbing inside of the dialog, it is possible to tab way out of the window itself and cycle through the browser even. We don't want that to happen since the dialog should contain its own tab sequence. We will need to trap the user's focus within and in order to do that, we would have to take away the native event behavior that goes on in the event handler `handleKeyDown`, by adding an `event.preventDefault()`:
+If you noticed while tabbing inside of the dialog, it is possible to tab way out of the window itself and cycle through the browser even. We don't want that to happen since the dialog should contain its own tab sequence. We will need to trap the user's focus within and in order to do that, we would have to take away the native event behavior that goes on in the event handler `handleKeyDown`, by adding an `event.preventDefault()`, but only if the user is not hitting Tab or Escape:
 
 ```jsx
 const handleKeyDown = event => {
+    if (![Tab, Escape].includes(event.keyCode)) return;
     event.preventDefault();
 };
 ```
 
-Since this takes away the inherit `Tab` and `Shift` + `Tab` keyboard navigation and the `Enter`/`Space` for interacting with any interactable elements (such as buttons), we will have to re-implement this manually later on.
+Since this takes away the inherit `Tab` and `Shift` + `Tab` keyboard navigation, we will have to re-implement this manually later on.
 
 ## `Escape` Key
 Let's implement the `Escape` key, which closes the dialog. `handleKeyDown` is our function handler here, and it should check for an Escape keycode (27). When it is pressed, it calls `closeDialog()`:
@@ -56,6 +57,7 @@ Let's implement the `Escape` key, which closes the dialog. `handleKeyDown` is ou
 const handleKeyDown = event => {
     if (event.keyCode === Escape) {
         closeDialog();
+        return;
     }
 };
 ```
@@ -162,28 +164,6 @@ if (event.keyCode === Tab && !event.shiftKey) {
     } else {
        document.activeElement.nextSibling.focus();
     }
-}
-```
-
-## `Enter`/`Space` Keys
-Lastly, we have to re-implement the default `Enter`/`Space` behavior, so we would have to check if the `event.keyCode` is Enter (13) or Space (32). I wrote a helper function to check for either and reads better in code:
-
-```javascript
-// utils.js
-const Space = 32;
-const Enter = 13;
-
-export const isEnterEvent = event => {
-  const enterKeyCodes = [Space, Enter];
-
-  return enterKeyCodes.includes(event.keyCode);
-};
-```
-
-In the `handleKeyDown` event handler, we would then add:
-```javascript
-if (isEnterEvent(event)) {
-    document.activeElement.click();
 }
 ```
 
