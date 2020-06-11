@@ -38,23 +38,36 @@ First, let's talk about what we need in order for us to handle the interactions 
 >
 ```
 
+```javascript
+const handleKeyDown = event => {
+    // this function handles the events onKeyDown
+};
+```
+
 ## Keeping the Focus Within the Dialog Modal
-If you noticed while tabbing inside of the dialog, it is possible to tab way out of the window itself and cycle through the browser even. We don't want that to happen since the dialog should contain its own tab sequence. We will need to trap the user's focus within and in order to do that, we would have to take away the native event behavior that goes on in the event handler `handleKeyDown`, by adding an `event.preventDefault()`, but only if the user is not hitting Tab or Escape:
+If you noticed while tabbing inside of the dialog, it is possible to tab way out of the window itself and cycle through the browser even. We don't want that to happen since the dialog should contain its own tab sequence. We will need to trap the user's focus within and control the tab order. n order to do that, we would have to take away the native event behavior that goes on in the event handler `handleKeyDown`, by adding an `event.preventDefault()`, but only if the user is not hitting Tab or Escape:
 
 ```jsx
+// event.keyCode
+const Tab = 9;
+const Escape = 27;
+
 const handleKeyDown = event => {
     if (![Tab, Escape].includes(event.keyCode)) return;
     event.preventDefault();
 };
 ```
 
-Since this takes away the inherit `Tab` and `Shift` + `Tab` keyboard navigation, we will have to re-implement this manually later on.
+This way, we can keep the default event handling for all the other keys like `Enter` or `Space`, but we're going to implement `Tab` and `Escape` manually, since we are modifying their behavior for this modal dialog.
 
 ## `Escape` Key
-Let's implement the `Escape` key, which closes the dialog. `handleKeyDown` is our function handler here, and it should check for an Escape keycode (27). When it is pressed, it calls `closeDialog()`:
+Let's implement the `Escape` key, which is supposed to close the dialog. We'll add to our `handleKeyDown`. It should check for an Escape keycode. When it is pressed, it calls `closeDialog()`:
 
 ```javascript
 const handleKeyDown = event => {
+    if (![Tab, Escape].includes(event.keyCode)) return;
+    event.preventDefault();
+
     if (event.keyCode === Escape) {
         closeDialog();
         return;
