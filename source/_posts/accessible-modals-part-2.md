@@ -88,15 +88,15 @@ if (event.keyCode === Tab && !event.shiftKey) {
 
 Since the logic is never both true, it would be unnecessary to put them in an `else if`. We'll add the logic after this one tidbit.
 
-## Keeping Tabs on All Interactable Elements ;)
-In order to know if the user is at the first or the last interactable element, we would first need to keep tabs on all the elements that are interactable within the dialog. There are two ways that I can think of to go about this. It's possible to use `document.querySelectorAll()` to find all the interactable elements (inputs, buttons, etc.) so we would have an iterable list of elements. The second way is using callback refs by putting a `ref` on all the interactable elements within the dialog and writing the callback function to add the element to the array of refs. I prefer the second way since we are in React-land and refs are the preferred way when trying to access a DOM element.
+## Keeping Tabs on All Focusable Elements ;)
+In order to know if the user is at the first or the last focusable element, we would first need to keep tabs on all the elements that are focusable within the dialog. There are two ways that I can think of to go about this. It's possible to use `document.querySelectorAll()` to find all the focusable elements (inputs, buttons, etc.) so we would have an iterable list of elements. The second way is using callback refs by putting a `ref` on all the focusable elements within the dialog and writing the callback function to add the element to the array of refs. I'm going go with the second way in this example since we are in React-land and refs are the preferred way when trying to access a DOM element. In the scenario where you have more than a few elements to focus on, adding `ref` to all the elements can be a pain, so I would recommend using `element.querySelectorAll()` in that case.
 
-First, I would need to keep a ref for the array of refs that I will use to add my interactable elements into it:
+First, I would need to keep a ref for the array of refs that I will use to add my focusable elements into it:
 ```javascript
-const interactableELements = useRef([]);
+const focusableELements = useRef([]);
 ```
 
-Next, on my two buttons, I will simply add `ref={setInteractableElements}` with `setInteractableElements` being the callback function I will use to add to the array of all the interactable elements.
+Next, on my two buttons, I will simply add `ref={setFocusableElements}` with `setFocusableElements` being the callback function I will use to add to the array of all the focusable elements.
 
 The two buttons in JSX:
 ```jsx
@@ -104,37 +104,37 @@ The two buttons in JSX:
     className="spectrum-Button spectrum-Button--secondary"
     onClick={closeDialog}
     autoFocus
-    ref={setInteractableElements}
+    ref={setFocusableElements}
 >
     Also Agreed
 </button>
 <button
     className="spectrum-Button spectrum-Button--cta"
     onClick={closeDialog}
-    ref={setInteractableElements}
+    ref={setFocusableElements}
 >
     Agreed
 </button>
 ```
 
-The `setInteractableElements` callback function:
+The `setFocusableElements` callback function:
 ```javascript
-const setInteractableElements = element => {
+const setFocusableElements = element => {
     if (!element) return;
-    if (interactableElements.current.find(interactableElement => interactableElement === element)) return;
-    interactableElements.current = [...interactableElements.current, element];
+    if (focusableElements.current.find(focusableElement => focusableElement === element)) return;
+    focusableElements.current = [...focusableElements.current, element];
 };
 ```
 
 Callback refs have the [caveat of being called twice](https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs) during an update, so I usually short-circuit the function if the element is `null` (the first run) and if the element already exists inside the array of refs.
 
 ## `Tab` at the Last Element, `Shift` + `Tab` on the First Element
-Now that we have all the refs in `interactableElements`, we can move on to implementing the logic for `Tab` and `Shift` + `Tab`. We said that if the user presses `Tab` on the last element, we'd bring them to the first, and if they presses `Shift` + `Tab` while they are on the first element, we would send them to the last element.
+Now that we have all the refs in `focusableElements`, we can move on to implementing the logic for `Tab` and `Shift` + `Tab`. We said that if the user presses `Tab` on the last element, we'd bring them to the first, and if they presses `Shift` + `Tab` while they are on the first element, we would send them to the last element.
 
 Let's first define the first and last element:
 
 ```javascript
-const elements = interactableElements.current;
+const elements = focusableElements.current;
 const firstElement = elements[0];
 const lastElement = elements[elements.length - 1];
 ```
