@@ -9,6 +9,9 @@ tags:
 - non-technical
 ---
 
+{% picture steps.jpg %}
+{% endpicture %}
+
 Accessibility is so much bigger than just a project to be finished and completed. I think that this is because most websites and products weren't originally built with accessibility in mind. And thanks to the growing amount of [website accessibility lawsuits](https://www.essentialaccessibility.com/blog/web-accessibility-lawsuits/), it has now become a concern for most companies. [Epics](https://www.atlassian.com/agile/project-management/epics#:~:text=An%20epic%20is%20a%20large%20body%20of%20work%20that%20can,over%20a%20set%20of%20sprints.) are created, and teams are formed around addressing accessibility. But even as it is a growing concern for many companies, engineers have a lack of knowledge in writing accessible UIs. I see engineers optionally choosing to pick up accessibility work and leaving the work of accessibility to either the one person who seems to like accessibility, or leaving it to another team and having it to be their role to address accessibility. I don't think that's the right approach. It's not just about equipping a team or having one person pick up the knowledge and putting that team or person in charge of accessibility. "It'll go away by the end of the year." No. There is no "end" to accessibility work. It should be part of the World Wide Web. We all have to pick up and accept that accessibility is going to be part of our everyday workflow. It's not optional and we should all hold ourselves accountable to that.
 
 ## Two Steps Forward and One Step Back 

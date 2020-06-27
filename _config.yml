@@ -123,3 +123,9 @@ deploy:
   type: git
   repo: git@github.com:yanandcoffee/yanandcoffee.github.io.git
   branch: master
+
+images:
+  enable: true
+  base_dir: ".images"
+  manifestFileName: "images.json"
+  excludeSourceImages: true

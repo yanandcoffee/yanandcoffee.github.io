@@ -1,0 +1,196 @@
+{
+    "_posts\\accessible-modals\\role=dialog.png": {
+        "size": 16489,
+        "hash": "1ca26cfe9248384d586d0b0f3d39d99e",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "2x": {
+                "w": 496,
+                "h": 336
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "default": "1ca26cfe/role=dialog@2x.png",
+            "png": {
+                "2x": "1ca26cfe/role=dialog@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\modal_with_correct_a11y.png": {
+        "size": 42195,
+        "hash": "138e2e5c9accf181daf8d38fcb00cd83",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 493,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 960,
+                "h": 493,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "default": "138e2e5c/modal_with_correct_a11y@2x.png",
+            "png": {
+                "1x": "138e2e5c/modal_with_correct_a11y@1x.png",
+                "2x": "138e2e5c/modal_with_correct_a11y@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\modal_with_focus_bug2.png": {
+        "size": 41487,
+        "hash": "52eb66f2f013cac13f0a545efde437fe",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 492,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 960,
+                "h": 492,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "default": "52eb66f2/modal_with_focus_bug2@2x.png",
+            "png": {
+                "1x": "52eb66f2/modal_with_focus_bug2@1x.png",
+                "2x": "52eb66f2/modal_with_focus_bug2@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\aria.png": {
+        "size": 41365,
+        "hash": "22dbadfcd8a0449dac61bfcb2258f770",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "2x": {
+                "w": 586,
+                "h": 503
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "default": "22dbadfc/aria@2x.png",
+            "png": {
+                "2x": "22dbadfc/aria@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\modal_with_focus_bug.png": {
+        "size": 42081,
+        "hash": "2b49ca9ffebccfa69d9b836329fd2e65",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 494,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 960,
+                "h": 494,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "default": "2b49ca9f/modal_with_focus_bug@2x.png",
+            "png": {
+                "1x": "2b49ca9f/modal_with_focus_bug@1x.png",
+                "2x": "2b49ca9f/modal_with_focus_bug@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\page-by-itself.png": {
+        "size": 35282,
+        "hash": "34f3a8d8a7e1449f9365f88aca641503",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 601,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 846,
+                "h": 601,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "webp": {
+                "1x": "34f3a8d8/page-by-itself@1x.webp",
+                "2x": "34f3a8d8/page-by-itself@2x.webp"
+            },
+            "default": "34f3a8d8/page-by-itself@2x.png",
+            "png": {
+                "1x": "34f3a8d8/page-by-itself@1x.png",
+                "2x": "34f3a8d8/page-by-itself@2x.png"
+            }
+        }
+    },
+    "_posts\\accessible-modals\\modal-concept.png": {
+        "size": 40358,
+        "hash": "1a6233ede709f56a9ec670f4bd94609d",
+        "relatedPath": "_posts\\accessible-modals.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 601,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 846,
+                "h": 601,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "webp": {
+                "1x": "1a6233ed/modal-concept@1x.webp",
+                "2x": "1a6233ed/modal-concept@2x.webp"
+            },
+            "default": "1a6233ed/modal-concept@1x.png",
+            "png": {
+                "2x": "1a6233ed/modal-concept@2x.png",
+                "1x": "1a6233ed/modal-concept@1x.png"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\steps.jpg": {
+        "size": 4907374,
+        "hash": "33df226aad7a644fc28b6ae4affca4c4",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "default": "33df226a/steps@2x.jpg",
+            "jpg": {
+                "1x": "33df226a/steps@1x.jpg",
+                "2x": "33df226a/steps@2x.jpg"
+            }
+        }
+    }
+}
