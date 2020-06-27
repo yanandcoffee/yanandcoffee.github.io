@@ -1,6 +1,6 @@
 ---
 title: Accessibility is not a project to be completed
-description: It's more than just tickets in the backlog. You're not solving for accessibility if you treat it like a project. You're avoiding your responsibilities as an engineer.
+description: It's more than just tickets in the backlog. You're not solving for accessibility if you treat it like a project.
 date: 2020-06-21 17:00:47
 tags:
 - accessibility
