@@ -13,7 +13,7 @@ tags:
 
 The working demo/intro page for my `<SkipLinks />` component is available if you'd prefer to get right into the component and its usage:
 
-https://csb-jl7m1-17t0gwz4x.vercel.app/
+https://csb-jl7m1.netlify.app/
 
 ## The Component
 There are a few ways to create and define the skip links, but it will be easier once you understand how the structure of the skip links should be like. The component itself isn't a complicated UI. It is pretty much a navigation component that more or less would look like this:
