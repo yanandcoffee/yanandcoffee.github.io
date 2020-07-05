@@ -192,5 +192,175 @@
                 "2x": "33df226a/steps@2x.jpg"
             }
         }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\bill-oxford--fgqsewtsjy-unsplash.jpg": {
+        "size": 5903600,
+        "hash": "e5d02f8c7a417d4049f2a9aaef2c5638",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "webp": {
+                "1x": "e5d02f8c/bill-oxford--fgqsewtsjy-unsplash@1x.webp",
+                "2x": "e5d02f8c/bill-oxford--fgqsewtsjy-unsplash@2x.webp"
+            },
+            "default": "e5d02f8c/bill-oxford--fgqsewtsjy-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "e5d02f8c/bill-oxford--fgqsewtsjy-unsplash@1x.jpg",
+                "2x": "e5d02f8c/bill-oxford--fgqsewtsjy-unsplash@2x.jpg"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\alvaro-reyes-qwwphwip31m-unsplash.jpg": {
+        "size": 972436,
+        "hash": "5cae4e0cda5f102eae9dbcd310124fa3",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "webp": {
+                "1x": "5cae4e0c/alvaro-reyes-qwwphwip31m-unsplash@1x.webp",
+                "2x": "5cae4e0c/alvaro-reyes-qwwphwip31m-unsplash@2x.webp"
+            },
+            "default": "5cae4e0c/alvaro-reyes-qwwphwip31m-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "5cae4e0c/alvaro-reyes-qwwphwip31m-unsplash@1x.jpg",
+                "2x": "5cae4e0c/alvaro-reyes-qwwphwip31m-unsplash@2x.jpg"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\charles-deluvio-pjah2ax4uwk-unsplash.jpg": {
+        "size": 1293319,
+        "hash": "9453d7cd715d9c94eb7ad90dd2455250",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "webp": {
+                "1x": "9453d7cd/charles-deluvio-pjah2ax4uwk-unsplash@1x.webp",
+                "2x": "9453d7cd/charles-deluvio-pjah2ax4uwk-unsplash@2x.webp"
+            },
+            "default": "9453d7cd/charles-deluvio-pjah2ax4uwk-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "9453d7cd/charles-deluvio-pjah2ax4uwk-unsplash@1x.jpg",
+                "2x": "9453d7cd/charles-deluvio-pjah2ax4uwk-unsplash@2x.jpg"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\israel-palacio-imcukz72ous-unsplash.jpg": {
+        "size": 4335062,
+        "hash": "f23305cee9e7ed71927a17bd1476012b",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "webp": {
+                "1x": "f23305ce/israel-palacio-imcukz72ous-unsplash@1x.webp",
+                "2x": "f23305ce/israel-palacio-imcukz72ous-unsplash@2x.webp"
+            },
+            "default": "f23305ce/israel-palacio-imcukz72ous-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "f23305ce/israel-palacio-imcukz72ous-unsplash@1x.jpg",
+                "2x": "f23305ce/israel-palacio-imcukz72ous-unsplash@2x.jpg"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\ludde-lorentz-yfcvcpmnd38-unsplash.jpg": {
+        "size": 1398888,
+        "hash": "e430b0c3f6dea19a0908d13770293bba",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1350,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "webp": {
+                "1x": "e430b0c3/ludde-lorentz-yfcvcpmnd38-unsplash@1x.webp",
+                "2x": "e430b0c3/ludde-lorentz-yfcvcpmnd38-unsplash@2x.webp"
+            },
+            "default": "e430b0c3/ludde-lorentz-yfcvcpmnd38-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "e430b0c3/ludde-lorentz-yfcvcpmnd38-unsplash@1x.jpg",
+                "2x": "e430b0c3/ludde-lorentz-yfcvcpmnd38-unsplash@2x.jpg"
+            }
+        }
+    },
+    "_posts\\accessibility-is-not-a-project-to-be-completed\\christian-chen-kpydzvywfqg-unsplash.jpg": {
+        "size": 4907374,
+        "hash": "33df226aad7a644fc28b6ae4affca4c4",
+        "relatedPath": "_posts\\accessibility-is-not-a-project-to-be-completed.md",
+        "dimensions": {
+            "1x": {
+                "w": 640,
+                "h": 800,
+                "media": "(max-width: 39.99em)"
+            },
+            "2x": {
+                "w": 1800,
+                "h": 1200,
+                "media": "(min-width: 40em)"
+            }
+        },
+        "originalType": "jpg",
+        "files": {
+            "default": "33df226a/christian-chen-kpydzvywfqg-unsplash@2x.jpg",
+            "jpg": {
+                "1x": "33df226a/christian-chen-kpydzvywfqg-unsplash@1x.jpg",
+                "2x": "33df226a/christian-chen-kpydzvywfqg-unsplash@2x.jpg"
+            }
+        }
     }
 }
