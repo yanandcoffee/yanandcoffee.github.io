@@ -20,6 +20,9 @@ There are a few ways to create and define the skip links, but it will be easier 
 
 ```jsx
 export default function SkipLinks() {
+  // if there isn't any skip links, don't render anything
+  if (!skipLinks.length) return null;
+
   return (
     <nav>
       <ul>
@@ -71,7 +74,7 @@ I created a `useSkipLinks` hook that internally uses `document.querySelectorAll`
 import { useState, useEffect } from "react";
 
 export default function useSkipLinks() {
-  const [skipLinks, setSkipLinks] = useState();
+  const [skipLinks, setSkipLinks] = useState([]);
 
   useEffect(() => {
     const skipLinkElements = document.querySelectorAll(
@@ -92,4 +95,4 @@ export default function useSkipLinks() {
 Everything is contained within the `<SkipLinks />` component, and you wouldn't need to generate the list of elements in a specific data structure.
 
 ## Conclusion
-You may have to make minor modifications to make my code work for your use case, but understanding what skip links are and how they can be defined will help broaden your understanding of how to make your own reusable component, skip links, or not. This component will be open-sourced on Github at a later time.
+You may have to make minor modifications to make my code work for your use case, but understanding what skip links are and how they can be defined will help broaden your understanding of how to make your own reusable component, skip links, or not. This component is now open-sourced on [Github](https://github.com/yanandcoffee/react-skiplinks) and written with Typescript for more robustness.
