@@ -129,3 +129,9 @@ images:
   base_dir: ".images"
   manifestFileName: "images.json"
   excludeSourceImages: true
+
+symbols_count_time:
+  exclude_codeblock: true
+  awl: 5
+  wpm: 265
+  suffix: "min"
