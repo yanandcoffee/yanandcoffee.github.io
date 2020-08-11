@@ -362,5 +362,26 @@
                 "2x": "33df226a/christian-chen-kpydzvywfqg-unsplash@2x.jpg"
             }
         }
+    },
+    "_posts\\button-vs-div\\icons8-close-window-48.png": {
+        "size": 1081,
+        "hash": "a9977bf0d9aab8befc3f22567836b512",
+        "relatedPath": "_posts\\button-vs-div.md",
+        "dimensions": {
+            "2x": {
+                "w": 48,
+                "h": 48
+            }
+        },
+        "originalType": "png",
+        "files": {
+            "webp": {
+                "2x": "a9977bf0/icons8-close-window-48@2x.webp"
+            },
+            "default": "a9977bf0/icons8-close-window-48@2x.png",
+            "png": {
+                "2x": "a9977bf0/icons8-close-window-48@2x.png"
+            }
+        }
     }
 }
