@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Modals are a pretty common pattern in UI&#x2F;UX design, but they also come with a lot of accessibility concerns if done incorrectly. Here&#39;s how you can do it right.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Accessible Modals, Part 1 - Its Issues and the Solutions">
+<meta property="og:url" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/">
+<meta property="og:site_name" content="Yan and Coffee&#39;s Blog">
+<meta property="og:description" content="Modals are a pretty common pattern in UI&#x2F;UX design, but they also come with a lot of accessibility concerns if done incorrectly. Here&#39;s how you can do it right.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/modal-concept.png">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/page-by-itself.png">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/role=dialog.png">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/aria.png">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/modal_with_focus_bug.png">
+<meta property="og:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/modal_with_focus_bug2.png">
+<meta property="article:published_time" content="2020-05-26T03:25:00.000Z">
+<meta property="article:modified_time" content="2020-06-05T08:12:00.000Z">
+<meta property="article:author" content="Yan Li">
+<meta property="article:tag" content="accessibility">
+<meta property="article:tag" content="a11y">
+<meta property="article:tag" content="modals">
+<meta property="article:tag" content="focus management">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="refs">
+<meta property="article:tag" content="tabindex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yanandcoffee.com/2020/05/26/accessible-modals/modal-concept.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Accessible Modals, Part 1 - Its Issues and the Solutions</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+      
+        
+        <link rel="alternate" href="/atom.xml" title="Yan and Coffee&#39;s Blog" type="application/atom+xml"/>
+      
+        
+        <link rel="alternate" href="/rss.xml" title="Yan and Coffee&#39;s Blog" type="application/rss+xml"/>
+      
+    
+    <link rel="stylesheet" href="https://use.typekit.net/eum8aer.css">
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-a11y-dark.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <div class="flex title-wrapper">
+    <a href="/">
+      <img id="logo" width=75 heigh=75 src="/images/logo.png" />
+    </a>
+    <div>
+      <div id="title">
+        <h1><a href="/">Yan and Coffee&#39;s Blog</a></h1>
+      </div>
+      <span class="subtitle">on all things frontend related that make a better user experience</span>
+    </div>
+  </div>
+  <!-- <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+    </ul>
+  </div> -->
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Accessible Modals, Part 1 - Its Issues and the Solutions
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">By Yan Li</span>
+      </span>
+      
+
+      
+    <div class="article-tag">
+        <a class="tag-link" href="/tags/React/" rel="tag">React</a><a class="tag-link" href="/tags/a11y/" rel="tag">a11y</a><a class="tag-link" href="/tags/accessibility/" rel="tag">accessibility</a><a class="tag-link" href="/tags/focus-management/" rel="tag">focus management</a><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a><a class="tag-link" href="/tags/modals/" rel="tag">modals</a><a class="tag-link" href="/tags/refs/" rel="tag">refs</a><a class="tag-link" href="/tags/tabindex/" rel="tag">tabindex</a>
+    </div>
+
+
+      
+    <span class="postdate">
+      
+        <time datetime="2020-05-26T03:25:00.000Z" itemprop="datePublished">May 25, 2020</time>
+        
+      
+        </span>
+
+
+      <span class="count-time">
+    | <span class="time-unicode">⧗</span> 8 min read
+</span>
+    </div>
+  </header>
+  <div class="content" itemprop="articleBody">
+    <p>Modals are a pretty common pattern in UI/UX design and most people will understand how to interact with a modal due to its pattern affordance (dark underlay, typically pops over, etc), but they also come with a lot of accessibility concerns if done incorrectly. This post will be about how to create an accessibility compliant dialog modal in React. I will not be going into detail on how to create your own modal, but I will talk conceptually about what it is (so you can create your own), the types of accessibility concerns that come with designing your own modal, and how to address those issues.</p>
+<p>The <a href="https://codesandbox.io/s/accessible-modals-after-part-1-bnvuu?from-embed" target="_blank" rel="noopener">full example</a> used for this post is written in React. If you are using pure HTML/Javascript, the same concepts/techniques can still apply, but you would need to convert the implementation from one to another. For example, in JSX, <code>tabIndex</code> is camelcased, but in HTML, <code>tabindex</code> should be all lowercase. Some concepts may be explained in HTML for simplification/clarity purposes.</p>
+<p>I will be following the dialog modal guidelines from the <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal" target="_blank" rel="noopener">W3 Docs</a>.</p>
+<h2 id="Before-We-Get-Started"><a href="#Before-We-Get-Started" class="headerlink" title="Before We Get Started"></a>Before We Get Started</h2><p>Here’s the SparkNotes* version of the W3 requirements:</p>
+<ul>
+<li>Users cannot interact with content outside an active dialog window, meaning they contain their own tab sequence regardless of the other outside element (there are some cases where clicking outside of the dialog will close the dialog)</li>
+<li>Once the dialog is open, keyboard interactions should be as follows:<ul>
+<li><code>Tab</code> moves forward to the next tabbable element<ul>
+<li>if you are at the end, it moves to the first</li>
+</ul>
+</li>
+<li><code>Shift + Tab</code> moves to the previous tabbable element<ul>
+<li>if you are at the first, it moves to the last</li>
+</ul>
+</li>
+<li><code>Escape</code> closes the dialog</li>
+</ul>
+</li>
+<li>In almost all circumstances, opening a dialog should autofocus to the first focusable element contained in the dialog*<ul>
+<li>If the dialog has limited interactions, focus should be on the most frequently used element such as the <code>OK</code> or <code>Continue</code> button</li>
+</ul>
+</li>
+<li>When a dialog closes, focus should return to the element that invoked the dialog unless the work flow design makes more logical sense to set the focus elsewhere*</li>
+</ul>
+<p><small>* means it has been summarized and you should refer to the <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal" target="_blank" rel="noopener">docs</a> if you want more detailed guidelines.</small></p>
+<h2 id="What-Is-a-Dialog-Modal-amp-How-Does-It-Work"><a href="#What-Is-a-Dialog-Modal-amp-How-Does-It-Work" class="headerlink" title="What Is a Dialog Modal &amp; How Does It Work"></a>What Is a Dialog Modal &amp; How Does It Work</h2><p>If you understand what a dialog modal is and how it “works,” you understand how to implement it and the accessibility problems that may come from it. In simple terms without thinking about any code, a dialog modal is simply a box on top of another box.</p>
+<p><img src="./modal-concept.png" alt="Simplfied drawing of the modal UI"></p>
+<p>Initially, the modal is not on the page, so what does it mean for the logic? We hide the modal when the page loads.</p>
+<p><img src="./page-by-itself.png" alt="Simplified drawing of the page with a button"></p>
+<p>We only show the button for triggering the modal. When the user clicks the button, or triggers the button via the keyboard, the modal shows up. There may be an underlay element and some CSS that needs to be added to make this UI experience look and feel better, but the concept of a modal is simply 1) the HTML for the modal and 2) the logic to show and hide it. This is our modal pattern.</p>
+<h2 id="ARIA-Attributes"><a href="#ARIA-Attributes" class="headerlink" title="ARIA Attributes"></a>ARIA Attributes</h2><p>For screen reader users, this is important. This is the dialog div wrapping the content:</p>
+<p><img src="./role=dialog.png" alt="div receiving role=dialog"></p>
+<p>It should receive 1) <code>role=&quot;dialog&quot;</code>, 2) <code>aria-modal=&quot;true&quot;</code> if it is a focus trap and <strong>AND</strong> there is visual styling that obscures the content outside of it, 3) aria labeling for screen readers to announce the purpose of the dialog, e.g. the title with either an <code>aria-label</code> or a combination of <code>aria-labelledby</code> and an <code>id</code> on the (visible) dialog title.</p>
+<p><code>aria-label</code>:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog<span class="token punctuation">"</span></span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Coffee is Great<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p><code>aria-labelledby</code> and matching <code>id</code> on the (visible) dialog title:</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> 
+    <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog<span class="token punctuation">"</span></span> 
+    <span class="token attr-name">aria-modal</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> 
+    <span class="token attr-name">aria-labelledby</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-label<span class="token punctuation">"</span></span> 
+    <span class="token attr-name">aria-describedby</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-content<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span></code></pre>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby" target="_blank" rel="noopener"><code>aria-describedby</code></a> can also be used. It is similar to <code>aria-labelledby</code>, as they both should be on the element that wraps the main content they are describing. E.g. in the above example, <code>aria-labelledby</code> points to the heading title matching the <code>id</code>. <code>aria-describedby</code> should point to the text that describes the primary purpose of which it is on.</p>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog<span class="token punctuation">"</span></span> <span class="token attr-name">aria-modal</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">aria-labelledby</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-label<span class="token punctuation">"</span></span> <span class="token attr-name">aria-describedby</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-content<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Dialog spectrum-Dialog--medium<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Dialog-header<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-label<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Dialog-title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Coffee is Great<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Dialog-content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dialog-content<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Coffee is a Chihuahua mix and the best dog ever with a {stars div} rating.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Dialog-footer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button spectrum-Button--secondary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Also Agreed<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button spectrum-Button--cta<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Agreed<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>If all of the above is done correctly, it should be organized correctly like this for the screen reader users:</p>
+<p><img src="./aria.png" alt="accessibility tab on chrome"></p>
+<h2 id="Keyboard-Accessibility"><a href="#Keyboard-Accessibility" class="headerlink" title="Keyboard Accessibility"></a>Keyboard Accessibility</h2><p>In order to understand how to make an accessible modal, you have to test your UI. Start from the URL bar of your browser and do not use your mouse at all. Use only <code>Tab</code> and <code>Shift + Tab</code> keys to navigate through the UI. For my demo, I have 3 buttons that all trigger a modal. The testing experience looks like this:</p>
+<figure>
+  <video controls="controls" width="100%" height="100%" maxWidth="960" maxHeight="500" name="Video Name" src="./demo.mov"></video>
+</figure>
+
+<p>I tabbed forward and backward, interacted with the button trigger and tested the modal tab flow as well.</p>
+<p><a href="https://codesandbox.io/s/accessible-modals-before-nczzo?file=/src/components/ButtonsWithModal.js" target="_blank" rel="noopener">This</a> <em>looks</em> like we would be done if all we cared about was how a user interface looks. But once the modal is open, we can see there are a few accessibility issues.</p>
+<h3 id="Accessibility-Problem-1-Auto-Focus-Element-Inside-Modal"><a href="#Accessibility-Problem-1-Auto-Focus-Element-Inside-Modal" class="headerlink" title="Accessibility Problem #1: Auto Focus Element Inside Modal"></a>Accessibility Problem #1: Auto Focus Element Inside Modal</h3><p>As a user, once the modal is open, my focus appears to still be on the button that I invoked the dialog with and not on the first available element or the most frequently used element.</p>
+<p><img src="./modal_with_focus_bug.png" alt="Image of focus issue with active modal"></p>
+<p>Solution:<br>When the user invokes the dialog, the first element, the “Also Agreed” button, should be auto focused since we don’t want the user to accidentally trigger the call-to-action without realizing it. This is as easy as adding <code>autoFocus</code> attribute on the button inside of the Dialog. The only gotcha is that <code>autoFocus</code> would only work if you are mounting the <code>&lt;Dialog /&gt;</code> component at the time of the click since <code>autoFocus</code> attribute is <a href="https://github.com/facebook/react/issues/11851#issuecomment-351672131" target="_blank" rel="noopener">polyfilled in React</a> to call <code>.focus()</code> on the element that has this attribute due to browser inconsistencies with the html attribute <code>autofocus</code>.</p>
+<p>In my demo, within my Dialog component, I would put the <code>autoFocus</code> attribute on the button:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--secondary"</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>closeDialog<span class="token punctuation">}</span></span>
+    <span class="token attr-name">autoFocus</span>
+<span class="token punctuation">></span></span>
+    Also Agreed
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<p>This fixes the focus that was left outside of the modal (because you can only have one focus at a time), and it autofocuses on the first element when the modal shows up, telling the user where their focus is.</p>
+<h3 id="Accessibility-Problem-2-Tab-Sequence-Is-Not-Contained-Within"><a href="#Accessibility-Problem-2-Tab-Sequence-Is-Not-Contained-Within" class="headerlink" title="Accessibility Problem #2: Tab Sequence Is Not Contained Within"></a>Accessibility Problem #2: Tab Sequence Is Not Contained Within</h3><p>After fixing the above scenario, as a user, once the modal is open and tabbing past all interactable elements within the modal, my focus goes to an element outside of the active modal. I can also interact with the elements outside.</p>
+<p><img src="./modal_with_focus_bug2.png" alt="Image of accessibility issue with active modal"></p>
+<p>Solution:<br>When the user invokes the dialog, the buttons on the page need to be removed from the tab order of the page so that we can rely on the native sequential tab order to guide the user to the interactable elements available inside the modal. To remove an element from the sequential keyboard navigation order, we need to give the button elements a <code>tabIndex</code> of -1. Since we still want these buttons to be interactable after we close the modal, we will want to conditionally set this tabIndex value so that they aren’t focusable when the modal is open, but when the modal is closed, they should be.</p>
+<p>In JSX:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-1<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Tell me more<span class="token operator">!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-2<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Who's Coffee<span class="token operator">?</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-3<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>The drink<span class="token operator">?</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<blockquote>
+<p>Avoid using tabindex values greater than 0 as it’ll end up like the <code>z-index</code> battle</p>
+</blockquote>
+<h3 id="Accessibility-Problem-3-Closing-the-Modal"><a href="#Accessibility-Problem-3-Closing-the-Modal" class="headerlink" title="Accessibility Problem #3: Closing the Modal"></a>Accessibility Problem #3: Closing the Modal</h3><p>As a user, when I close the modal, my focus ends up going to the end of the page, which, if I tab enough, goes back to the URL bar of the browser.</p>
+<p>Solution:<br>When the user closes the modal, the focus needs to end up back on the initial element that triggered the modal. We can do this by figuring out which button was clicked, by storing a state in React called <code>selectedButtonId</code> and then keeping an array of refs for all the buttons so that we can get the ref of the button that was selected based on the selectedButtonId.</p>
+<p>First, we want to keep a state of the clicked button so we use <code>useState</code> hook:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token keyword">const</span> <span class="token punctuation">[</span>selectedButtonId<span class="token punctuation">,</span> setSelectedButtonId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>We modify the onButtonClick handler that was on our buttons to set the selectedButtonId:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token keyword">const</span> onButtonClick <span class="token operator">=</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setIsOpen</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setSelectedButton</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Then, we need to keep an array of button refs by using <code>useRef</code> hook and setting the button refs to be set via a callback ref function:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token keyword">const</span> buttonRefs <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> setSelectedRef <span class="token operator">=</span> <span class="token punctuation">(</span>element<span class="token punctuation">,</span> id<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>element<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>buttonRefs<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>ref <span class="token operator">=</span><span class="token operator">></span> ref<span class="token punctuation">.</span>id <span class="token operator">===</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    buttonRefs<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>buttonRefs<span class="token punctuation">.</span>current<span class="token punctuation">,</span> <span class="token punctuation">{</span> element<span class="token punctuation">,</span> id <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-1<span class="token punctuation">"</span></span>
+    <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>element <span class="token operator">=</span><span class="token operator">></span> <span class="token function">setSelectedRef</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> <span class="token string">"button-1"</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Tell me more<span class="token operator">!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-2<span class="token punctuation">"</span></span>
+    <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>element <span class="token operator">=</span><span class="token operator">></span> <span class="token function">setSelectedRef</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> <span class="token string">"button-2"</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Who's Coffee<span class="token operator">?</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>onButtonClick<span class="token punctuation">}</span></span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--primary"</span>
+    <span class="token attr-name">tabIndex</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>isOpen <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-3<span class="token punctuation">"</span></span>
+    <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>element <span class="token operator">=</span><span class="token operator">></span> <span class="token function">setSelectedRef</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> <span class="token string">"button-3"</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button-label<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>The drink<span class="token operator">?</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<p>Next, we need to trigger the focus on the previously selected button by adding a <code>focusSelectedButton</code> function:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token keyword">const</span> closeDialog <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setIsOpen</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">focusSelectedButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> focusSelectedButton <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+    buttonRefs<span class="token punctuation">.</span>current
+        <span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>ref <span class="token operator">=</span><span class="token operator">></span> ref<span class="token punctuation">.</span>id <span class="token operator">===</span> selectedButtonId<span class="token punctuation">)</span>
+        <span class="token operator">?</span><span class="token punctuation">.</span>element<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><small>* I used <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining" target="_blank" rel="noopener">optional chaining</a> in <code>focusSelectedButton()</code> here so that the UI does not break if it can’t find the selected button element.</small></p>
+<p>This should focus on the previously selected button when the dialog closes.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>I walked through the most common accessibility issues that one would face when creating their own modal and how to address these issues with techniques such as controlling the sequential tab order with <code>tabIndex</code> (<a href="https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex" target="_blank" rel="noopener">tabindex</a>) and <a href="https://reactjs.org/docs/accessibility.html#programmatically-managing-focus" target="_blank" rel="noopener">programmatically managing focus</a> with React refs.</p>
+<p>That’s it for part 1! Part 2 will be focused on how we can enable <code>Tab</code>, <code>Shift + Tab</code> + <code>Escape</code> keys within an active modal to behave like the guidelines mentioned in the <a href="#before-we-get-started">SparkNotes section</a>. This is the working demo for the current state:</p>
+<iframe
+    src="https://codesandbox.io/embed/accessible-modals-after-part-1-bnvuu?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FButtonsWithModal.js&theme=dark"
+    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+    title="Accessible Modals: After, Part 1"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
+></iframe>
+
+<p>Stay tuned!</p>
+
+  </div>
+  <div id="actions">
+    <ul>
+      
+      <li><a class="icon" href="/2020/06/06/accessible-modals-part-2/" aria-label="Previous post"><i class="fas fa-chevron-left fa-lg" aria-hidden="true"></i></a></li>
+      
+      
+      <li><a class="icon" href="/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/" aria-label="Next post"><i class="fas fa-chevron-right fa-lg" aria-hidden="true"></i></a></li>
+      
+      <li><a class="icon" href="#" aria-label="Back to top"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i></a></li>
+    </ul>
+</div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <!-- <div id="nav-footer" style="display: none">
+      <ul>
+        
+      </ul>
+    </div> -->
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Before-We-Get-Started"><span class="toc-number">1.</span> <span class="toc-text">Before We Get Started</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Is-a-Dialog-Modal-amp-How-Does-It-Work"><span class="toc-number">2.</span> <span class="toc-text">What Is a Dialog Modal &amp; How Does It Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARIA-Attributes"><span class="toc-number">3.</span> <span class="toc-text">ARIA Attributes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keyboard-Accessibility"><span class="toc-number">4.</span> <span class="toc-text">Keyboard Accessibility</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Accessibility-Problem-1-Auto-Focus-Element-Inside-Modal"><span class="toc-number">4.1.</span> <span class="toc-text">Accessibility Problem #1: Auto Focus Element Inside Modal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Accessibility-Problem-2-Tab-Sequence-Is-Not-Contained-Within"><span class="toc-number">4.2.</span> <span class="toc-text">Accessibility Problem #2: Tab Sequence Is Not Contained Within</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Accessibility-Problem-3-Closing-the-Modal"><span class="toc-number">4.3.</span> <span class="toc-text">Accessibility Problem #3: Closing the Modal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="actions-footer">
+        <!-- <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a> -->
+        <a id="toc" class="icon toc-wrapper" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i>Table of Contents</a>
+        <!-- <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a> -->
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Yan Li
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-165704155-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+<script src="https://kit.fontawesome.com/97139a15ad.js" crossorigin="anonymous"></script>
+</body>
+</html>

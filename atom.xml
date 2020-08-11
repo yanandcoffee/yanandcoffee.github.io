@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yan and Coffee&#39;s Blog</title>
+  <icon>https://www.yanandcoffee.com/icon.png</icon>
+  <subtitle>on all things frontend related that make a better user experience</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.yanandcoffee.com/"/>
+  <updated>2020-08-11T03:57:33.348Z</updated>
+  <id>https://www.yanandcoffee.com/</id>
+  
+  <author>
+    <name>Yan Li</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Button vs Div for Accessibility</title>
+    <link href="https://www.yanandcoffee.com/2020/08/10/button-vs-div/"/>
+    <id>https://www.yanandcoffee.com/2020/08/10/button-vs-div/</id>
+    <published>2020-08-10T05:15:47.000Z</published>
+    <updated>2020-08-11T03:57:33.348Z</updated>
+    
+    <summary type="html">
+    
+      A TLDR; post on the pros/cons of using a &lt;button&gt; vs &lt;div role=&quot;button&quot;&gt;.
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="a11y" scheme="https://www.yanandcoffee.com/tags/a11y/"/>
+    
+      <category term="javascript" scheme="https://www.yanandcoffee.com/tags/javascript/"/>
+    
+      <category term="React" scheme="https://www.yanandcoffee.com/tags/React/"/>
+    
+      <category term="buttons" scheme="https://www.yanandcoffee.com/tags/buttons/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Creating a &lt;SkipLinks /&gt; Component</title>
+    <link href="https://www.yanandcoffee.com/2020/07/05/skip-links/"/>
+    <id>https://www.yanandcoffee.com/2020/07/05/skip-links/</id>
+    <published>2020-07-05T18:04:17.000Z</published>
+    <updated>2020-08-11T03:57:33.348Z</updated>
+    
+    <summary type="html">
+    
+      An easy, reusable solution for adding skip navigation links to all your React apps
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="React" scheme="https://www.yanandcoffee.com/tags/React/"/>
+    
+      <category term="skip links" scheme="https://www.yanandcoffee.com/tags/skip-links/"/>
+    
+      <category term="hooks" scheme="https://www.yanandcoffee.com/tags/hooks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Accessibility Is Not a Project to Be Completed</title>
+    <link href="https://www.yanandcoffee.com/2020/06/21/accessibility-is-not-a-project-to-be-completed/"/>
+    <id>https://www.yanandcoffee.com/2020/06/21/accessibility-is-not-a-project-to-be-completed/</id>
+    <published>2020-06-21T21:00:47.000Z</published>
+    <updated>2020-08-11T03:57:33.244Z</updated>
+    
+    <summary type="html">
+    
+      It&#39;s more than just tickets in the backlog. You&#39;re not solving for accessibility if you treat it like a project.
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="a11y" scheme="https://www.yanandcoffee.com/tags/a11y/"/>
+    
+      <category term="community" scheme="https://www.yanandcoffee.com/tags/community/"/>
+    
+      <category term="non-technical" scheme="https://www.yanandcoffee.com/tags/non-technical/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Accessible Modals, Part 2 - Focus Trap! Key Events!</title>
+    <link href="https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/"/>
+    <id>https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/</id>
+    <published>2020-06-06T07:20:00.000Z</published>
+    <updated>2020-08-11T03:57:33.336Z</updated>
+    
+    <summary type="html">
+    
+      In this continuation, you&#39;ll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal.
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="a11y" scheme="https://www.yanandcoffee.com/tags/a11y/"/>
+    
+      <category term="keyboard" scheme="https://www.yanandcoffee.com/tags/keyboard/"/>
+    
+      <category term="modals" scheme="https://www.yanandcoffee.com/tags/modals/"/>
+    
+      <category term="focus management" scheme="https://www.yanandcoffee.com/tags/focus-management/"/>
+    
+      <category term="javascript" scheme="https://www.yanandcoffee.com/tags/javascript/"/>
+    
+      <category term="React" scheme="https://www.yanandcoffee.com/tags/React/"/>
+    
+      <category term="refs" scheme="https://www.yanandcoffee.com/tags/refs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Accessible Modals, Part 1 - Its Issues and the Solutions</title>
+    <link href="https://www.yanandcoffee.com/2020/05/26/accessible-modals/"/>
+    <id>https://www.yanandcoffee.com/2020/05/26/accessible-modals/</id>
+    <published>2020-05-26T03:25:00.000Z</published>
+    <updated>2020-06-05T08:12:00.000Z</updated>
+    
+    <summary type="html">
+    
+      Modals are a pretty common pattern in UI/UX design, but they also come with a lot of accessibility concerns if done incorrectly. Here&#39;s how you can do it right.
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="a11y" scheme="https://www.yanandcoffee.com/tags/a11y/"/>
+    
+      <category term="modals" scheme="https://www.yanandcoffee.com/tags/modals/"/>
+    
+      <category term="focus management" scheme="https://www.yanandcoffee.com/tags/focus-management/"/>
+    
+      <category term="javascript" scheme="https://www.yanandcoffee.com/tags/javascript/"/>
+    
+      <category term="React" scheme="https://www.yanandcoffee.com/tags/React/"/>
+    
+      <category term="refs" scheme="https://www.yanandcoffee.com/tags/refs/"/>
+    
+      <category term="tabindex" scheme="https://www.yanandcoffee.com/tags/tabindex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Accessible Navigation With Smooth Scrolling + Focus Management</title>
+    <link href="https://www.yanandcoffee.com/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/"/>
+    <id>https://www.yanandcoffee.com/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/</id>
+    <published>2020-05-08T23:31:12.000Z</published>
+    <updated>2020-08-11T03:57:33.340Z</updated>
+    
+    <summary type="html">
+    
+      Ever wonder how your users can navigate to a section smoothly and not lose their keyboard focus?
+    
+    </summary>
+    
+    
+    
+      <category term="accessibility" scheme="https://www.yanandcoffee.com/tags/accessibility/"/>
+    
+      <category term="a11y" scheme="https://www.yanandcoffee.com/tags/a11y/"/>
+    
+      <category term="focus management" scheme="https://www.yanandcoffee.com/tags/focus-management/"/>
+    
+      <category term="javascript" scheme="https://www.yanandcoffee.com/tags/javascript/"/>
+    
+      <category term="React" scheme="https://www.yanandcoffee.com/tags/React/"/>
+    
+      <category term="scrolling" scheme="https://www.yanandcoffee.com/tags/scrolling/"/>
+    
+      <category term="css" scheme="https://www.yanandcoffee.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hi, My Name Is Yan!</title>
+    <link href="https://www.yanandcoffee.com/2020/05/07/Hi-My-Name-is-Yan/"/>
+    <id>https://www.yanandcoffee.com/2020/05/07/Hi-My-Name-is-Yan/</id>
+    <published>2020-05-07T02:17:40.000Z</published>
+    <updated>2020-08-11T03:57:33.244Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;I’m just going to briefly introduce myself and Coffee here. The logo of this blog is a drawing of my dog, Coffee. This blog was started
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Yan and Coffee&#39;s Blog</title>
+    <link>https://www.yanandcoffee.com/</link>
+    
+    <image>
+      <url>https://www.yanandcoffee.com/icon.png</url>
+      <title>Yan and Coffee&#39;s Blog</title>
+      <link>https://www.yanandcoffee.com/</link>
+    </image>
+    
+    <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>My name is Yan Li. I&#39;m a Senior Software Engineer at Adobe and I like to create user experiences that matter. This is my place to share posts about web development involving Javascript, CSS, React and UI/UX.</description>
+    <pubDate>Tue, 11 Aug 2020 03:57:33 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Button vs Div for Accessibility</title>
+      <link>https://www.yanandcoffee.com/2020/08/10/button-vs-div/</link>
+      <guid>https://www.yanandcoffee.com/2020/08/10/button-vs-div/</guid>
+      <pubDate>Mon, 10 Aug 2020 05:15:47 GMT</pubDate>
+      <description>
+      
+        A TLDR; post on the pros/cons of using a &lt;button&gt; vs &lt;div role=&quot;button&quot;&gt;.
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/08/10/button-vs-div/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Creating a &lt;SkipLinks /&gt; Component</title>
+      <link>https://www.yanandcoffee.com/2020/07/05/skip-links/</link>
+      <guid>https://www.yanandcoffee.com/2020/07/05/skip-links/</guid>
+      <pubDate>Sun, 05 Jul 2020 18:04:17 GMT</pubDate>
+      <description>
+      
+        An easy, reusable solution for adding skip navigation links to all your React apps
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/07/05/skip-links/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Accessibility Is Not a Project to Be Completed</title>
+      <link>https://www.yanandcoffee.com/2020/06/21/accessibility-is-not-a-project-to-be-completed/</link>
+      <guid>https://www.yanandcoffee.com/2020/06/21/accessibility-is-not-a-project-to-be-completed/</guid>
+      <pubDate>Sun, 21 Jun 2020 21:00:47 GMT</pubDate>
+      <description>
+      
+        It&#39;s more than just tickets in the backlog. You&#39;re not solving for accessibility if you treat it like a project.
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/06/21/accessibility-is-not-a-project-to-be-completed/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Accessible Modals, Part 2 - Focus Trap! Key Events!</title>
+      <link>https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/</link>
+      <guid>https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/</guid>
+      <pubDate>Sat, 06 Jun 2020 07:20:00 GMT</pubDate>
+      <description>
+      
+        In this continuation, you&#39;ll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal.
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Accessible Modals, Part 1 - Its Issues and the Solutions</title>
+      <link>https://www.yanandcoffee.com/2020/05/26/accessible-modals/</link>
+      <guid>https://www.yanandcoffee.com/2020/05/26/accessible-modals/</guid>
+      <pubDate>Tue, 26 May 2020 03:25:00 GMT</pubDate>
+      <description>
+      
+        Modals are a pretty common pattern in UI/UX design, but they also come with a lot of accessibility concerns if done incorrectly. Here&#39;s how you can do it right.
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/05/26/accessible-modals/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Accessible Navigation With Smooth Scrolling + Focus Management</title>
+      <link>https://www.yanandcoffee.com/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/</link>
+      <guid>https://www.yanandcoffee.com/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/</guid>
+      <pubDate>Fri, 08 May 2020 23:31:12 GMT</pubDate>
+      <description>
+      
+        Ever wonder how your users can navigate to a section smoothly and not lose their keyboard focus?
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/05/08/accessible-smooth-scrolling-and-focus-management-solutions/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Hi, My Name Is Yan!</title>
+      <link>https://www.yanandcoffee.com/2020/05/07/Hi-My-Name-is-Yan/</link>
+      <guid>https://www.yanandcoffee.com/2020/05/07/Hi-My-Name-is-Yan/</guid>
+      <pubDate>Thu, 07 May 2020 02:17:40 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;I’m just going to briefly introduce myself and Coffee here. The logo of this blog is a drawing of my dog, Coffee. This blog was started
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://www.yanandcoffee.com/2020/05/07/Hi-My-Name-is-Yan/#disqus_thread</comments>
+    </item>
+    
+  </channel>
+</rss>

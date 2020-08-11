@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="In this continuation, you&#39;ll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Accessible Modals, Part 2 - Focus Trap! Key Events!">
+<meta property="og:url" content="https://www.yanandcoffee.com/2020/06/06/accessible-modals-part-2/">
+<meta property="og:site_name" content="Yan and Coffee&#39;s Blog">
+<meta property="og:description" content="In this continuation, you&#39;ll learn how to create a focus trap within your dialog modal to keep track of key events that allow keyboard users to access your perfectly designed modal.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-06T07:20:00.000Z">
+<meta property="article:modified_time" content="2020-08-11T03:57:33.336Z">
+<meta property="article:author" content="Yan Li">
+<meta property="article:tag" content="accessibility">
+<meta property="article:tag" content="a11y">
+<meta property="article:tag" content="keyboard">
+<meta property="article:tag" content="modals">
+<meta property="article:tag" content="focus management">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="refs">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Accessible Modals, Part 2 - Focus Trap! Key Events!</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+      
+        
+        <link rel="alternate" href="/atom.xml" title="Yan and Coffee&#39;s Blog" type="application/atom+xml"/>
+      
+        
+        <link rel="alternate" href="/rss.xml" title="Yan and Coffee&#39;s Blog" type="application/rss+xml"/>
+      
+    
+    <link rel="stylesheet" href="https://use.typekit.net/eum8aer.css">
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-a11y-dark.css" type="text/css"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    <div class="content index py4">
+        <header id="header">
+  <div class="flex title-wrapper">
+    <a href="/">
+      <img id="logo" width=75 heigh=75 src="/images/logo.png" />
+    </a>
+    <div>
+      <div id="title">
+        <h1><a href="/">Yan and Coffee&#39;s Blog</a></h1>
+      </div>
+      <span class="subtitle">on all things frontend related that make a better user experience</span>
+    </div>
+  </div>
+  <!-- <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+      
+    </ul>
+  </div> -->
+</header>
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Accessible Modals, Part 2 - Focus Trap! Key Events!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">By Yan Li</span>
+      </span>
+      
+
+      
+    <div class="article-tag">
+        <a class="tag-link" href="/tags/React/" rel="tag">React</a><a class="tag-link" href="/tags/a11y/" rel="tag">a11y</a><a class="tag-link" href="/tags/accessibility/" rel="tag">accessibility</a><a class="tag-link" href="/tags/focus-management/" rel="tag">focus management</a><a class="tag-link" href="/tags/javascript/" rel="tag">javascript</a><a class="tag-link" href="/tags/keyboard/" rel="tag">keyboard</a><a class="tag-link" href="/tags/modals/" rel="tag">modals</a><a class="tag-link" href="/tags/refs/" rel="tag">refs</a>
+    </div>
+
+
+      
+    <span class="postdate">
+      
+        <time datetime="2020-06-06T07:20:00.000Z" itemprop="datePublished">Jun 06, 2020</time>
+        
+      
+        </span>
+
+
+      <span class="count-time">
+    | <span class="time-unicode">⧗</span> 5 min read
+</span>
+    </div>
+  </header>
+  <div class="content" itemprop="articleBody">
+    <p>In my <a href="https://www.yanandcoffee.com/2020/05/26/accessible-modals/">last post</a>, I wrote about how to create accessible modals following the W3C’s <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal" target="_blank" rel="noopener">WAI-ARIA 1.1</a> guidelines. Part 1 covers ARIA attributes, focus management, and some of the most common accessibility concerns that come with creating a simple dialog modal. In this part, I will be covering how to listen to events within the modal so that when you are moving inside using <code>Tab</code> / <code>Shift</code> + <code>Tab</code>, you are following the following rules:</p>
+<ul>
+<li>Users cannot interact with content outside an active dialog window, meaning they contain their own tab sequence regardless of the other outside element (there are some cases where clicking outside of the dialog will close the dialog)</li>
+<li>Once the dialog is open, keyboard interactions should be as follows:<ul>
+<li><code>Tab</code> moves forward to the next tabbable element<ul>
+<li>if you are at the end, it moves to the first</li>
+</ul>
+</li>
+<li><code>Shift + Tab</code> moves to the previous tabbable element<ul>
+<li>if you are at the first, it moves to the last</li>
+</ul>
+</li>
+<li><code>Escape</code> closes the dialog</li>
+</ul>
+</li>
+</ul>
+<p>I will be walking through this <a href="https://codesandbox.io/s/accessible-modals-part-2-pljct?file=/src/components/Dialog.js" target="_blank" rel="noopener">example</a> to explain the implementation and I will be using the terms “modal” and “dialog” interchangably to refer to the same dialog modal UI pattern.</p>
+<h2 id="What-Do-We-Need"><a href="#What-Do-We-Need" class="headerlink" title="What Do We Need"></a>What Do We Need</h2><p>First, let’s talk about what we need in order for us to handle the interactions based on the keys being pressed. We’re going to need to listen for key events within the dialog. The most logical way to do it in React would be on the uppermost parent modal div with <code>onKeyDown</code> and a function handler, <code>handleKeyDown</code>. We don’t want to listen for events on the document or window unless we absolutely have to.</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
+    <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token function">classNames</span><span class="token punctuation">(</span><span class="token string">"spectrum-Dialog-wrapper spectrum-Underlay"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token string">"is-open"</span><span class="token punctuation">:</span> isModalOpen
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span>
+    <span class="token attr-name">onKeyDown</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>handleKeyDown<span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> handleKeyDown <span class="token operator">=</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// this function handles the events onKeyDown</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Keeping-the-Focus-Within-the-Dialog-Modal"><a href="#Keeping-the-Focus-Within-the-Dialog-Modal" class="headerlink" title="Keeping the Focus Within the Dialog Modal"></a>Keeping the Focus Within the Dialog Modal</h2><p>If you noticed while tabbing inside of the dialog, it is possible to tab way out of the window itself and cycle through the browser even. We don’t want that to happen since the dialog should contain its own tab sequence. We will need to trap the user’s focus within and control the tab order. n order to do that, we would have to take away the native event behavior that goes on in the event handler <code>handleKeyDown</code>, by adding an <code>event.preventDefault()</code>, but only if the user is not hitting Tab or Escape:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token comment" spellcheck="true">// event.keyCode</span>
+<span class="token keyword">const</span> Tab <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Escape <span class="token operator">=</span> <span class="token number">27</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> handleKeyDown <span class="token operator">=</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">[</span>Tab<span class="token punctuation">,</span> Escape<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>This way, we can keep the default event handling for all the other keys like <code>Enter</code> or <code>Space</code>, but we’re going to implement <code>Tab</code> and <code>Escape</code> manually, since we are modifying their behavior for this modal dialog.</p>
+<h2 id="Escape-Key"><a href="#Escape-Key" class="headerlink" title="Escape Key"></a><code>Escape</code> Key</h2><p>Let’s implement the <code>Escape</code> key, which is supposed to close the dialog. We’ll add to our <code>handleKeyDown</code>. It should check for an Escape keycode. When it is pressed, it calls <code>closeDialog()</code>:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> handleKeyDown <span class="token operator">=</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">[</span>Tab<span class="token punctuation">,</span> Escape<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Escape<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">closeDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h2 id="Tab-Shift-Tab-Keys"><a href="#Tab-Shift-Tab-Keys" class="headerlink" title="Tab / Shift + Tab Keys"></a><code>Tab</code> / <code>Shift</code> + <code>Tab</code> Keys</h2><p>Next, let’s add some conditionals for checking if the key(s) pressed are <code>Tab</code>, or <code>Shift</code> + <code>Tab</code>. The way pressing both <code>Shift</code> + <code>Tab</code> work for the event handler is that it will be registered as both <code>event.keyCode</code> (9) and <code>event.shiftKey</code>, so we would have to check for both <code>Shift</code> + <code>Tab</code> as a combination of <code>Tab</code> <strong>AND</strong> <code>Shift</code>. On the flip side, that means checking for <code>Tab</code> would be a <code>Tab</code> AND NOT <code>Shift</code> conditional, since <code>Shift</code> + <code>Tab</code> is still a <code>Tab</code> in the end. The long way of writing this would be:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Tab<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>shiftKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this is Shift + Tab</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// this is only Tab</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>The cleaner way, if you want to avoid nesting too many if/else:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Tab <span class="token operator">&amp;&amp;</span> event<span class="token punctuation">.</span>shiftKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// placeholder for Shift + Tab logic</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Tab <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>event<span class="token punctuation">.</span>shiftKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// placeholder for Tab logic</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Since the logic is never both true, it would be unnecessary to put them in an <code>else if</code>. We’ll add the logic after this one tidbit.</p>
+<h2 id="Keeping-Tabs-on-All-Focusable-Elements"><a href="#Keeping-Tabs-on-All-Focusable-Elements" class="headerlink" title="Keeping Tabs on All Focusable Elements ;)"></a>Keeping Tabs on All Focusable Elements ;)</h2><p>In order to know if the user is at the first or the last focusable element, we would first need to keep tabs on all the elements that are focusable within the dialog. There are two ways that I can think of to go about this. It’s possible to use <code>document.querySelectorAll()</code> to find all the focusable elements (inputs, buttons, etc.) so we would have an iterable list of elements. The second way is using callback refs by putting a <code>ref</code> on all the focusable elements within the dialog and writing the callback function to add the element to the array of refs. I’m going go with the second way in this example since we are in React-land and refs are the preferred way when trying to access a DOM element. In the scenario where you have more than a few elements to focus on, adding <code>ref</code> to all the elements can be a pain, so I would recommend using <code>element.querySelectorAll()</code> in that case.</p>
+<p>First, I would need to keep a ref for the array of refs that I will use to add my focusable elements into it:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> focusableELements <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Next, on my two buttons, I will simply add <code>ref={setFocusableElements}</code> with <code>setFocusableElements</code> being the callback function I will use to add to the array of all the focusable elements.</p>
+<p>The two buttons in JSX:</p>
+<pre class=" language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--secondary"</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>closeDialog<span class="token punctuation">}</span></span>
+    <span class="token attr-name">autoFocus</span>
+    <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>setFocusableElements<span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+    Also Agreed
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+    <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spectrum-Button</span> <span class="token attr-name">spectrum-Button--cta"</span>
+    <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>closeDialog<span class="token punctuation">}</span></span>
+    <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>setFocusableElements<span class="token punctuation">}</span></span>
+<span class="token punctuation">></span></span>
+    Agreed
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></code></pre>
+<p>The <code>setFocusableElements</code> callback function:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> setFocusableElements <span class="token operator">=</span> element <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>element<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>focusableElements<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>focusableElement <span class="token operator">=</span><span class="token operator">></span> focusableElement <span class="token operator">===</span> element<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    focusableElements<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>focusableElements<span class="token punctuation">.</span>current<span class="token punctuation">,</span> element<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Callback refs have the <a href="https://reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs" target="_blank" rel="noopener">caveat of being called twice</a> during an update, so I usually short-circuit the function if the element is <code>null</code> (the first run) and if the element already exists inside the array of refs.</p>
+<h2 id="Tab-at-the-Last-Element-Shift-Tab-on-the-First-Element"><a href="#Tab-at-the-Last-Element-Shift-Tab-on-the-First-Element" class="headerlink" title="Tab at the Last Element, Shift + Tab on the First Element"></a><code>Tab</code> at the Last Element, <code>Shift</code> + <code>Tab</code> on the First Element</h2><p>Now that we have all the refs in <code>focusableElements</code>, we can move on to implementing the logic for <code>Tab</code> and <code>Shift</code> + <code>Tab</code>. We said that if the user presses <code>Tab</code> on the last element, we’d bring them to the first, and if they presses <code>Shift</code> + <code>Tab</code> while they are on the first element, we would send them to the last element.</p>
+<p>Let’s first define the first and last element:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> elements <span class="token operator">=</span> focusableElements<span class="token punctuation">.</span>current<span class="token punctuation">;</span>
+<span class="token keyword">const</span> firstElement <span class="token operator">=</span> elements<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> lastElement <span class="token operator">=</span> elements<span class="token punctuation">[</span>elements<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement" target="_blank" rel="noopener"><code>document.activeElement</code></a> is an easiest way to get the currently focused element natively.</p>
+<p>In the scenario of <code>Shift</code> + <code>Tab</code>, we would first check if the active element is the first element. If it is, we should focus on the last element. Otherwise, since that we took away all the default behavior logic, the default <code>Shift</code> + <code>Tab</code> on a non-first element should bring you back to the previous element. We can get the previous element relative to the currently focused element with <code>document.activeElement.previousSibling</code>. We just need to call <code>.focus()</code> accordingly.</p>
+<p><code>Shift</code> + <code>Tab</code> logic written in code:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Tab <span class="token operator">&amp;&amp;</span> event<span class="token punctuation">.</span>shiftKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>activeElement <span class="token operator">===</span> firstElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        lastElement<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        document<span class="token punctuation">.</span>activeElement<span class="token punctuation">.</span>previousSibling<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>For <code>Tab</code>, we would check if the active element is the last element. If it is, then we will focus on the first element. Otherwise, the default behavior we need to re-implement would be focusing on the next element, which can be found with <code>document.activeElement.nextSibling</code>.</p>
+<p><code>Tab</code> logic written in logic:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>keyCode <span class="token operator">===</span> Tab <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>event<span class="token punctuation">.</span>shiftKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>activeElement <span class="token operator">===</span> lastElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firstElement<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+       document<span class="token punctuation">.</span>activeElement<span class="token punctuation">.</span>nextSibling<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Now you can write your own fully accessible, W3C compliant dialog modal given all the information, tools, tips, and techinques I’ve given you here and in <a href="https://www.yanandcoffee.com/2020/05/26/accessible-modals/">Part 1</a>! Hopefully this will equip you with the knowledge to write dialog modals with accessibility in mind.</p>
+<p>Here’s the Code Sandbox that I worked with for this example:</p>
+<iframe
+    src="https://codesandbox.io/embed/accessible-modals-part-2-pljct?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FDialog.js&theme=dark"
+    style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+    title="Accessible Modals Part 2"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-autoplay allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+  </div>
+  <div id="actions">
+    <ul>
+      
+      <li><a class="icon" href="/2020/06/21/accessibility-is-not-a-project-to-be-completed/" aria-label="Previous post"><i class="fas fa-chevron-left fa-lg" aria-hidden="true"></i></a></li>
+      
+      
+      <li><a class="icon" href="/2020/05/26/accessible-modals/" aria-label="Next post"><i class="fas fa-chevron-right fa-lg" aria-hidden="true"></i></a></li>
+      
+      <li><a class="icon" href="#" aria-label="Back to top"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i></a></li>
+    </ul>
+</div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <!-- <div id="nav-footer" style="display: none">
+      <ul>
+        
+      </ul>
+    </div> -->
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Do-We-Need"><span class="toc-number">1.</span> <span class="toc-text">What Do We Need</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keeping-the-Focus-Within-the-Dialog-Modal"><span class="toc-number">2.</span> <span class="toc-text">Keeping the Focus Within the Dialog Modal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Escape-Key"><span class="toc-number">3.</span> <span class="toc-text">Escape Key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tab-Shift-Tab-Keys"><span class="toc-number">4.</span> <span class="toc-text">Tab &#x2F; Shift + Tab Keys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keeping-Tabs-on-All-Focusable-Elements"><span class="toc-number">5.</span> <span class="toc-text">Keeping Tabs on All Focusable Elements ;)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tab-at-the-Last-Element-Shift-Tab-on-the-First-Element"><span class="toc-number">6.</span> <span class="toc-text">Tab at the Last Element, Shift + Tab on the First Element</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="actions-footer">
+        <!-- <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a> -->
+        <a id="toc" class="icon toc-wrapper" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i>Table of Contents</a>
+        <!-- <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a> -->
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Yan Li
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-165704155-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+<script src="https://kit.fontawesome.com/97139a15ad.js" crossorigin="anonymous"></script>
+</body>
+</html>
