@@ -1,5 +1,6 @@
 ---
 title: <button> vs <div role="button">
+description: A TLDR; post on the pros/cons of using a <button> vs <div role="button">.
 date: 2020-08-10 01:15:47
 tags:
 - React
